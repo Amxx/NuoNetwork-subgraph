@@ -5,11 +5,11 @@ import {
 	Account,
 	User,
 	AccountUser,
-	LogImplChanged,
-	LogTransferBySystem,
-	LogTransferByUser,
-	LogUserAdded,
-	LogUserRemoved,
+	AccountImplChanged,
+	AccountTransferBySystem,
+	AccountTransferByUser,
+	AccountUserAdded,
+	AccountUserRemoved,
 } from '../generated/schema'
 
 import {
@@ -21,16 +21,16 @@ import {
 } from '../generated/templates/Account/Account'
 
 import {
+	logTransaction,
 	createEventID,
 	createAccountUserID,
 } from './utils'
 
 export function handleLogImplChanged(event: LogImplChangedEvent): void
 {
-	let e = new LogImplChanged(createEventID(event))
-	e.transaction = event.transaction.hash
+	let e = new AccountImplChanged(createEventID(event))
+	e.transaction = logTransaction(event).id
 	e.timestamp   = event.block.timestamp
-	e.blockNumber = event.block.number
 	e.account     = event.address.toHex()
 	e.newImpl     = event.params.newImpl
 	e.oldImpl     = event.params.oldImpl
@@ -42,10 +42,9 @@ export function handleLogTransferBySystem(event: LogTransferBySystemEvent): void
 	let token = new Token(event.params.token.toHex())
 	token.save()
 
-	let e = new LogTransferBySystem(createEventID(event))
-	e.transaction = event.transaction.hash
+	let e = new AccountTransferBySystem(createEventID(event))
+	e.transaction = logTransaction(event).id
 	e.timestamp   = event.block.timestamp
-	e.blockNumber = event.block.number
 	e.token       = token.id
 	e.from        = event.address.toHex()
 	e.to          = event.params.to
@@ -59,10 +58,9 @@ export function handleLogTransferByUser(event: LogTransferByUserEvent): void
 	let token = new Token(event.params.token.toHex())
 	token.save()
 
-	let e = new LogTransferBySystem(createEventID(event))
-	e.transaction = event.transaction.hash
+	let e = new AccountTransferBySystem(createEventID(event))
+	e.transaction = logTransaction(event).id
 	e.timestamp   = event.block.timestamp
-	e.blockNumber = event.block.number
 	e.token       = token.id
 	e.from        = event.address.toHex()
 	e.to          = event.params.to
@@ -81,10 +79,9 @@ export function handleLogUserAdded(event: LogUserAddedEvent): void
 	accountuser.user    = user.id
 	accountuser.save()
 
-	let e = new LogUserAdded(createEventID(event))
-	e.transaction = event.transaction.hash
+	let e = new AccountUserAdded(createEventID(event))
+	e.transaction = logTransaction(event).id
 	e.timestamp   = event.block.timestamp
-	e.blockNumber = event.block.number
 	e.account     = event.address.toHex()
 	e.user        = user.id
 	e.by          = event.params.by
@@ -98,10 +95,9 @@ export function handleLogUserRemoved(event: LogUserRemovedEvent): void
 
 	store.remove('AccountUser', createAccountUserID(event.address.toHex(), user.id))
 
-	let e = new LogUserRemoved(createEventID(event))
-	e.transaction = event.transaction.hash
+	let e = new AccountUserRemoved(createEventID(event))
+	e.transaction = logTransaction(event).id
 	e.timestamp   = event.block.timestamp
-	e.blockNumber = event.block.number
 	e.account     = event.address.toHex()
 	e.user        = user.id
 	e.by          = event.params.by

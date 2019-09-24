@@ -1,19 +1,37 @@
+type Transaction @entity {
+	id:                           ID!
+	from:                         Bytes!
+	to:                           Bytes!
+	value:                        BigInt!
+	gasUsed:                      BigInt!
+	gasPrice:                     BigInt!
+	timestamp:                    BigInt!
+	blockNumber:                  BigInt!
+	accountTransferEvents:        [AccountTransferEvent!]! @derivedFrom(field: "transaction")
+	accountMaintenanceEvent:      [AccountMaintenanceEvent!]! @derivedFrom(field: "transaction")
+	reserveOrderEvent:            [ReserveOrderEvent!]! @derivedFrom(field: "transaction")
+	kernelOrderEvent:             [KernelOrderEvent!]! @derivedFrom(field: "transaction")
+}
+
+# =============================================================================
+# =                                                                           =
+# =============================================================================
 type Token @entity {
 	id:                           ID!
-	transfers:                    [LogTransfer!]! @derivedFrom(field: "token")
-	reserveupdates:               [ReserveValuesUpdated!]! @derivedFrom(field: "token")
-	reserveorders:                [ReserveOrder!]! @derivedFrom(field: "token")
-	kernelorder_principal:        [KernelOrder!]! @derivedFrom(field: "principalToken")
-	kernelorder_collateral:       [KernelOrder!]! @derivedFrom(field: "collateralToken")
+	transfers:                    [AccountTransferEvent!]! @derivedFrom(field: "token")
+	reserveUpdates:               [ReserveValuesUpdated!]! @derivedFrom(field: "token")
+	asReserve:                    [ReserveOrder!]! @derivedFrom(field: "token")
+	asPrincipal:                  [KernelOrder!]! @derivedFrom(field: "principalToken")
+	asCollateral:                 [KernelOrder!]! @derivedFrom(field: "collateralToken")
 }
 
 type Account @entity {
 	id:                           ID!
 	users:                        [AccountUser!]! @derivedFrom(field: "account")
-	transfers:                    [LogTransfer!]! @derivedFrom(field: "account")
-	reserveorders:                [ReserveOrder!]! @derivedFrom(field: "account")
-	kernelorder:                  [KernelOrder!]! @derivedFrom(field: "account")
-	maintenance:                  [LogMaintenance!]! @derivedFrom(field: "account")
+	lending:                      [ReserveOrder!]! @derivedFrom(field: "account")
+	borrowing:                    [KernelOrder!]! @derivedFrom(field: "account")
+	transfers:                    [AccountTransferEvent!]! @derivedFrom(field: "account")
+	maintenance:                  [AccountMaintenanceEvent!]! @derivedFrom(field: "account")
 }
 
 type User @entity {
@@ -30,11 +48,10 @@ type AccountUser @entity {
 # =============================================================================
 # =                         Account - Transfer events                         =
 # =============================================================================
-interface LogTransfer {
+interface AccountTransferEvent {
 	id:                           ID!
-	transaction:                  Bytes!
+	transaction:                  Transaction!
 	timestamp:                    BigInt!
-	blockNumber:                  BigInt!
 	token:                        Token!
 	from:                         Account!
 	to:                           Bytes!
@@ -42,11 +59,10 @@ interface LogTransfer {
 	by:                           Bytes!
 }
 
-type LogTransferBySystem implements LogTransfer @entity {
+type AccountTransferBySystem implements AccountTransferEvent @entity {
 	id:                           ID!
-	transaction:                  Bytes!
+	transaction:                  Transaction!
 	timestamp:                    BigInt!
-	blockNumber:                  BigInt!
 	token:                        Token!
 	from:                         Account!
 	to:                           Bytes!
@@ -54,11 +70,10 @@ type LogTransferBySystem implements LogTransfer @entity {
 	by:                           Bytes!
 }
 
-type LogTransferByUser implements LogTransfer @entity {
+type AccountTransferByUser implements AccountTransferEvent @entity {
 	id:                           ID!
-	transaction:                  Bytes!
+	transaction:                  Transaction!
 	timestamp:                    BigInt!
-	blockNumber:                  BigInt!
 	token:                        Token!
 	from:                         Account!
 	to:                           Bytes!
@@ -69,39 +84,35 @@ type LogTransferByUser implements LogTransfer @entity {
 # =============================================================================
 # =                      Account - Administative events                       =
 # =============================================================================
-interface LogMaintenance {
+interface AccountMaintenanceEvent {
 	id:                           ID!
-	transaction:                  Bytes!
+	transaction:                  Transaction!
 	timestamp:                    BigInt!
-	blockNumber:                  BigInt!
 	account:                      Account!
 }
 
-type LogUserAdded implements LogMaintenance @entity {
+type AccountUserAdded implements AccountMaintenanceEvent @entity {
 	id:                           ID!
-	transaction:                  Bytes!
+	transaction:                  Transaction!
 	timestamp:                    BigInt!
-	blockNumber:                  BigInt!
 	account:                      Account!
 	user:                         User!
 	by:                           Bytes!
 }
 
-type LogUserRemoved implements LogMaintenance @entity {
+type AccountUserRemoved implements AccountMaintenanceEvent @entity {
 	id:                           ID!
-	transaction:                  Bytes!
+	transaction:                  Transaction!
 	timestamp:                    BigInt!
-	blockNumber:                  BigInt!
 	account:                      Account!
 	user:                         User!
 	by:                           Bytes!
 }
 
-type LogImplChanged implements LogMaintenance @entity {
+type AccountImplChanged implements AccountMaintenanceEvent @entity {
 	id:                           ID!
-	transaction:                  Bytes!
+	transaction:                  Transaction!
 	timestamp:                    BigInt!
-	blockNumber:                  BigInt!
 	account:                      Account!
 	newImpl:                      Bytes!
 	oldImpl:                      Bytes!
@@ -131,28 +142,39 @@ type ReserveOrder @entity {
 
 interface ReserveOrderEvent {
 	id:                           ID!
-	order:                        ReserveOrder!
+	transaction:                  Transaction!
 	timestamp:                    BigInt!
+	order:                        ReserveOrder!
+}
+
+type ReserveOrderCreated implements ReserveOrderEvent @entity {
+	id:                           ID!
+	transaction:                  Transaction!
+	timestamp:                    BigInt!
+	order:                        ReserveOrder!
 }
 
 type ReserveOrderCancelled implements ReserveOrderEvent @entity {
 	id:                           ID!
-	order:                        ReserveOrder!
+	transaction:                  Transaction!
 	timestamp:                    BigInt!
+	order:                        ReserveOrder!
 	by:                           Bytes!
 }
 
 type ReserveOrderCumulativeUpdate implements ReserveOrderEvent @entity {
 	id:                           ID!
-	order:                        ReserveOrder!
+	transaction:                  Transaction!
 	timestamp:                    BigInt!
+	order:                        ReserveOrder!
 	value:                        BigInt!
 }
 
 type ReserveValuesUpdated @entity {
 	id:                           ID!
-	token:                        Token!
+	transaction:                  Transaction!
 	timestamp:                    BigInt!
+	token:                        Token!
 	reserve:                      BigInt!
 	profit:                       BigInt!
 	loss:                         BigInt!
@@ -189,20 +211,30 @@ type KernelOrder @entity {
 
 interface KernelOrderEvent {
 	id:                           ID!
-	order:                        KernelOrder!
+	transaction:                  Transaction!
 	timestamp:                    BigInt!
+	order:                        KernelOrder!
+}
+
+type KernelOrderCreated implements KernelOrderEvent @entity {
+	id:                           ID!
+	transaction:                  Transaction!
+	timestamp:                    BigInt!
+	order:                        KernelOrder!
 }
 
 type KernelOrderRepaid implements KernelOrderEvent @entity {
 	id:                           ID!
-	order:                        KernelOrder!
+	transaction:                  Transaction!
 	timestamp:                    BigInt!
+	order:                        KernelOrder!
 	valueRepaid:                  BigInt!
 }
 
 type KernelOrderDefaulted implements KernelOrderEvent @entity {
 	id:                           ID!
-	order:                        KernelOrder!
+	transaction:                  Transaction!
 	timestamp:                    BigInt!
+	order:                        KernelOrder!
 	reason:                       KernelOrderDefaultedReason!
 }

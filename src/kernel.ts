@@ -1,5 +1,6 @@
 import {
 	KernelOrder,
+	KernelOrderCreated,
 	KernelOrderRepaid,
 	KernelOrderDefaulted,
 } from '../generated/schema'
@@ -11,6 +12,7 @@ import {
 } from '../generated/Kernel/Kernel'
 
 import {
+	logTransaction,
 	createEventID,
 } from './utils'
 
@@ -29,6 +31,12 @@ export function handleLogOrderCreated(event: LogOrderCreatedEvent): void
 	order.createdTimestamp    = event.block.timestamp
 	order.expirationTimestamp = event.params.expirationTimestamp
 	order.save()
+
+	let e = new KernelOrderCreated(createEventID(event))
+	e.transaction = logTransaction(event).id
+	e.timestamp   = event.block.timestamp
+	e.order       = order.id
+	e.save()
 }
 
 export function handleLogOrderRepaid(event: LogOrderRepaidEvent): void
@@ -38,8 +46,9 @@ export function handleLogOrderRepaid(event: LogOrderRepaidEvent): void
 	order.save()
 
 	let e = new KernelOrderRepaid(createEventID(event))
-	e.order       = order.id
+	e.transaction = logTransaction(event).id
 	e.timestamp   = event.block.timestamp
+	e.order       = order.id
 	e.valueRepaid = event.params.valueRepaid
 	e.save()
 }
@@ -51,8 +60,9 @@ export function handleLogOrderDefaulted(event: LogOrderDefaultedEvent): void
 	order.save()
 
 	let e = new KernelOrderDefaulted(createEventID(event))
-	e.order       = order.id
+	e.transaction = logTransaction(event).id
 	e.timestamp   = event.block.timestamp
+	e.order       = order.id
 	e.reason      = event.params.reason
 	e.save()
 }
