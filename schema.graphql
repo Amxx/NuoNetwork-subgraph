@@ -2,15 +2,16 @@ type Transaction @entity {
 	id:                           ID!
 	from:                         Bytes!
 	to:                           Bytes!
-	value:                        BigInt!
+	value:                        BigDecimal!
 	gasUsed:                      BigInt!
 	gasPrice:                     BigInt!
 	timestamp:                    BigInt!
 	blockNumber:                  BigInt!
 	accountTransferEvents:        [AccountTransferEvent!]! @derivedFrom(field: "transaction")
 	accountMaintenanceEvent:      [AccountMaintenanceEvent!]! @derivedFrom(field: "transaction")
-	reserveOrderEvent:            [ReserveOrderEvent!]! @derivedFrom(field: "transaction")
-	kernelOrderEvent:             [KernelOrderEvent!]! @derivedFrom(field: "transaction")
+	reserveOrderEvent:            [LendOrderEvent!]! @derivedFrom(field: "transaction")
+	BorrowOrderEvent:             [BorrowOrderEvent!]! @derivedFrom(field: "transaction")
+	tradeEvent:                   [TradeEvent!]! @derivedFrom(field: "transaction")
 }
 
 # =============================================================================
@@ -18,18 +19,23 @@ type Transaction @entity {
 # =============================================================================
 type Token @entity {
 	id:                           ID!
+	name:                         String!
+	symbol:                       String!
+	decimals:                     Int!
 	transfers:                    [AccountTransferEvent!]! @derivedFrom(field: "token")
-	reserveUpdates:               [ReserveValuesUpdated!]! @derivedFrom(field: "token")
-	asReserve:                    [ReserveOrder!]! @derivedFrom(field: "token")
-	asPrincipal:                  [KernelOrder!]! @derivedFrom(field: "principalToken")
-	asCollateral:                 [KernelOrder!]! @derivedFrom(field: "collateralToken")
+	reserves:                     [TokenReserve!]! @derivedFrom(field: "token")
+	isLent:                       [LendOrder!]! @derivedFrom(field: "token")
+	isBorrowed:                   [BorrowOrder!]! @derivedFrom(field: "principalToken")
+	isCollateral:                 [BorrowOrder!]! @derivedFrom(field: "collateralToken")
+	asTradeFrom:                  [TradeEvent!]! @derivedFrom(field: "srcToken")
+	asTradeTo:                    [TradeEvent!]! @derivedFrom(field: "destToken")
 }
 
 type Account @entity {
 	id:                           ID!
 	users:                        [AccountUser!]! @derivedFrom(field: "account")
-	lending:                      [ReserveOrder!]! @derivedFrom(field: "account")
-	borrowing:                    [KernelOrder!]! @derivedFrom(field: "account")
+	lending:                      [LendOrder!]! @derivedFrom(field: "account")
+	borrowing:                    [BorrowOrder!]! @derivedFrom(field: "account")
 	transfers:                    [AccountTransferEvent!]! @derivedFrom(field: "account")
 	maintenance:                  [AccountMaintenanceEvent!]! @derivedFrom(field: "account")
 }
@@ -55,7 +61,7 @@ interface AccountTransferEvent {
 	token:                        Token!
 	from:                         Account!
 	to:                           Bytes!
-	value:                        BigInt!
+	value:                        BigDecimal!
 	by:                           Bytes!
 }
 
@@ -66,7 +72,7 @@ type AccountTransferBySystem implements AccountTransferEvent @entity {
 	token:                        Token!
 	from:                         Account!
 	to:                           Bytes!
-	value:                        BigInt!
+	value:                        BigDecimal!
 	by:                           Bytes!
 }
 
@@ -77,7 +83,7 @@ type AccountTransferByUser implements AccountTransferEvent @entity {
 	token:                        Token!
 	from:                         Account!
 	to:                           Bytes!
-	value:                        BigInt!
+	value:                        BigDecimal!
 	by:                           Bytes!
 }
 
@@ -121,120 +127,165 @@ type AccountImplChanged implements AccountMaintenanceEvent @entity {
 # =============================================================================
 # =                             Reserve - Lending                             =
 # =============================================================================
-enum ReserveOrderStatus {
+enum LendOrderStatus {
 	ACTIVE
 	CLOSED
 }
 
-type ReserveOrder @entity {
+type LendOrder @entity {
 	id:                           ID!
-	status:                       ReserveOrderStatus!
+	status:                       LendOrderStatus!
 	account:                      Account!
 	byUser:                       User!
 	token:                        Token!
-	createdValue:                 BigInt!
+	createdValue:                 BigDecimal!
 	createdTimestamp:             BigInt!
-	cumulativeValue:              BigInt!
+	cumulativeValue:              BigDecimal!
 	cumulativeTimestamp:          BigInt!
 	expirationTimestamp:          BigInt!
-	updates:                      [ReserveOrderEvent!]! @derivedFrom(field: "order")
+	updates:                      [LendOrderEvent!]! @derivedFrom(field: "order")
 }
 
-interface ReserveOrderEvent {
+interface LendOrderEvent {
 	id:                           ID!
 	transaction:                  Transaction!
 	timestamp:                    BigInt!
-	order:                        ReserveOrder!
+	order:                        LendOrder!
 }
 
-type ReserveOrderCreated implements ReserveOrderEvent @entity {
+type LendOrderCreated implements LendOrderEvent @entity {
 	id:                           ID!
 	transaction:                  Transaction!
 	timestamp:                    BigInt!
-	order:                        ReserveOrder!
+	order:                        LendOrder!
 }
 
-type ReserveOrderCancelled implements ReserveOrderEvent @entity {
+type LendOrderCancelled implements LendOrderEvent @entity {
 	id:                           ID!
 	transaction:                  Transaction!
 	timestamp:                    BigInt!
-	order:                        ReserveOrder!
+	order:                        LendOrder!
 	by:                           Bytes!
 }
 
-type ReserveOrderCumulativeUpdate implements ReserveOrderEvent @entity {
+type LendOrderCumulativeUpdate implements LendOrderEvent @entity {
 	id:                           ID!
 	transaction:                  Transaction!
 	timestamp:                    BigInt!
-	order:                        ReserveOrder!
-	value:                        BigInt!
+	order:                        LendOrder!
+	value:                        BigDecimal!
 }
 
-type ReserveValuesUpdated @entity {
+type TokenReserve @entity {
 	id:                           ID!
 	transaction:                  Transaction!
 	timestamp:                    BigInt!
 	token:                        Token!
-	reserve:                      BigInt!
-	profit:                       BigInt!
-	loss:                         BigInt!
+	reserve:                      BigDecimal!
+	profit:                       BigDecimal!
+	loss:                         BigDecimal!
 }
 
 # =============================================================================
 # =                            Kernel - Borrowing                             =
 # =============================================================================
-enum KernelOrderStatus {
+enum BorrowOrderStatus {
 	ACTIVE
 	REPAID
 	DEFAULTED
 }
-enum KernelOrderDefaultedReason{
+enum BorrowOrderDefaultedReason{
 	DUE_DATE_PASSED
 	COLLATERAL_UNSAFE
 }
 
-type KernelOrder @entity {
+type BorrowOrder @entity {
 	id:                           ID!
-	status:                       KernelOrderStatus!
+	status:                       BorrowOrderStatus!
 	account:                      Account!
 	byUser:                       User!
 	principalToken:               Token!
-	principalAmount:              BigInt!
+	principalAmount:              BigDecimal!
 	collateralToken:              Token!
-	collateralAmount:             BigInt!
-	premium:                      BigInt!
-	fee:                          BigInt!
+	collateralAmount:             BigDecimal!
+	premium:                      BigDecimal!
+	fee:                          BigDecimal!
 	createdTimestamp:             BigInt!
 	expirationTimestamp:          BigInt!
-	updates:                      [KernelOrderEvent!]! @derivedFrom(field: "order")
+	updates:                      [BorrowOrderEvent!]! @derivedFrom(field: "order")
 }
 
-interface KernelOrderEvent {
+interface BorrowOrderEvent {
 	id:                           ID!
 	transaction:                  Transaction!
 	timestamp:                    BigInt!
-	order:                        KernelOrder!
+	order:                        BorrowOrder!
 }
 
-type KernelOrderCreated implements KernelOrderEvent @entity {
+type BorrowOrderCreated implements BorrowOrderEvent @entity {
 	id:                           ID!
 	transaction:                  Transaction!
 	timestamp:                    BigInt!
-	order:                        KernelOrder!
+	order:                        BorrowOrder!
 }
 
-type KernelOrderRepaid implements KernelOrderEvent @entity {
+type BorrowOrderRepaid implements BorrowOrderEvent @entity {
 	id:                           ID!
 	transaction:                  Transaction!
 	timestamp:                    BigInt!
-	order:                        KernelOrder!
-	valueRepaid:                  BigInt!
+	order:                        BorrowOrder!
+	valueRepaid:                  BigDecimal!
 }
 
-type KernelOrderDefaulted implements KernelOrderEvent @entity {
+type BorrowOrderDefaulted implements BorrowOrderEvent @entity {
 	id:                           ID!
 	transaction:                  Transaction!
 	timestamp:                    BigInt!
-	order:                        KernelOrder!
-	reason:                       KernelOrderDefaultedReason!
+	order:                        BorrowOrder!
+	reason:                       BorrowOrderDefaultedReason!
+}
+
+# =============================================================================
+# =                                  Trades                                   =
+# =============================================================================
+interface TradeEvent {
+	id:                           ID!
+	transaction:                  Transaction!
+	timestamp:                    BigInt!
+	from:                         Bytes!
+	srcToken:                     Token!
+	destToken:                    Token!
+	srcTokenValue:                BigDecimal!
+	srcTokenValueLeft:            BigDecimal!
+	destTokenValue:               BigDecimal!
+	destTokenValueMax:            BigDecimal!
+	exchangeRate:                 BigInt!
+}
+
+type UniswapTrade implements TradeEvent @entity {
+	id:                           ID!
+	transaction:                  Transaction!
+	timestamp:                    BigInt!
+	from:                         Bytes!
+	srcToken:                     Token!
+	destToken:                    Token!
+	srcTokenValue:                BigDecimal!
+	srcTokenValueLeft:            BigDecimal!
+	destTokenValue:               BigDecimal!
+	destTokenValueMax:            BigDecimal!
+	exchangeRate:                 BigInt!
+}
+
+type KyberTrade implements TradeEvent @entity {
+	id:                           ID!
+	transaction:                  Transaction!
+	timestamp:                    BigInt!
+	from:                         Bytes!
+	srcToken:                     Token!
+	destToken:                    Token!
+	srcTokenValue:                BigDecimal!
+	srcTokenValueLeft:            BigDecimal!
+	destTokenValue:               BigDecimal!
+	destTokenValueMax:            BigDecimal!
+	exchangeRate:                 BigInt!
 }

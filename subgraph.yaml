@@ -59,10 +59,10 @@ dataSources:
       apiVersion: 0.0.3
       language: wasm/assemblyscript
       entities:
-        - ReserveOrder
-        - ReserveOrderCancelled
-        - ReserveOrderCumulativeUpdate
-        - ReserveValuesUpdated
+        - LendOrder
+        - LendOrderCancelled
+        - LendOrderCumulativeUpdate
+        - ReserveUpdate
       abis:
         - name: Reserve
           file: abis/contracts/Reserve.json
@@ -103,6 +103,46 @@ dataSources:
           handler: handleLogOrderDefaulted
       file: ./src/kernel.ts
 
+  - name: KyberConnector
+    kind: ethereum/contract
+    network: mainnet
+    source:
+      address: '0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1'
+      abi: KyberConnector
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.3
+      language: wasm/assemblyscript
+      entities:
+        - KyberTrade
+      abis:
+        - name: KyberConnector
+          file: abis/contracts/KyberConnector.json
+      eventHandlers:
+        - event: LogTrade(indexed address,indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
+          handler: handleLogTradeKyber
+      file: ./src/connectors.ts
+
+  - name: UniswapConnector
+    kind: ethereum/contract
+    network: mainnet
+    source:
+      address: '0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8'
+      abi: UniswapConnector
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.3
+      language: wasm/assemblyscript
+      entities:
+        - UniswapTrade
+      abis:
+        - name: UniswapConnector
+          file: abis/contracts/UniswapConnector.json
+      eventHandlers:
+        - event: LogTrade(indexed address,indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
+          handler: handleLogTradeUniswap
+      file: ./src/connectors.ts
+
 templates:
   - name: Account
     kind: ethereum/contract
@@ -126,6 +166,8 @@ templates:
       abis:
         - name: Account
           file: abis/contracts/Account.json
+        - name: ERC20
+          file: abis/contracts/ERC20.json
       eventHandlers:
         - event: LogImplChanged(indexed address,indexed address)
           handler: handleLogImplChanged

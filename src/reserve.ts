@@ -1,9 +1,15 @@
 import {
-	ReserveOrder,
-	ReserveOrderCreated,
-	ReserveOrderCancelled,
-	ReserveOrderCumulativeUpdate,
-	ReserveValuesUpdated,
+	BigInt,
+	log,
+} from '@graphprotocol/graph-ts'
+
+import {
+	Token,
+	LendOrder,
+	LendOrderCreated,
+	LendOrderCancelled,
+	LendOrderCumulativeUpdate,
+	TokenReserve,
 } from '../generated/schema'
 
 import {
@@ -16,23 +22,26 @@ import {
 import {
 	logTransaction,
 	createEventID,
+	tokenValue,
 } from './utils'
 
 export function handleLogOrderCreated(event: LogOrderCreatedEvent): void
 {
-	let order = new ReserveOrder(event.params.orderHash.toHex())
+	let token = Token.load(event.params.token.toHex())
+
+	let order = new LendOrder(event.params.orderHash.toHex())
 	order.status              = 'ACTIVE'
 	order.account             = event.params.account.toHex()
-	order.token               = event.params.token.toHex()
+	order.token               = token.id
 	order.byUser              = event.params.byUser.toHex()
-	order.createdValue        = event.params.value
+	order.createdValue        = tokenValue(event.params.value, token.decimals as u8)
 	order.createdTimestamp    = event.block.timestamp
-	order.cumulativeValue     = event.params.value
+	order.cumulativeValue     = tokenValue(event.params.value, token.decimals as u8)
 	order.cumulativeTimestamp = event.block.timestamp
 	order.expirationTimestamp = event.params.expirationTimestamp
 	order.save()
 
-	let e = new ReserveOrderCreated(createEventID(event))
+	let e = new LendOrderCreated(createEventID(event))
 	e.transaction = logTransaction(event).id
 	e.timestamp   = event.block.timestamp
 	e.order       = order.id
@@ -41,11 +50,11 @@ export function handleLogOrderCreated(event: LogOrderCreatedEvent): void
 
 export function handleLogOrderCancelled(event: LogOrderCancelledEvent): void
 {
-	let order = new ReserveOrder(event.params.orderHash.toHex())
+	let order = new LendOrder(event.params.orderHash.toHex())
 	order.status = 'CLOSED'
 	order.save()
 
-	let e = new ReserveOrderCancelled(createEventID(event))
+	let e = new LendOrderCancelled(createEventID(event))
 	e.transaction = logTransaction(event).id
 	e.timestamp   = event.block.timestamp
 	e.order       = order.id
@@ -55,27 +64,40 @@ export function handleLogOrderCancelled(event: LogOrderCancelledEvent): void
 
 export function handleLogOrderCumulativeUpdated(event: LogOrderCumulativeUpdatedEvent): void
 {
-	let order = new ReserveOrder(event.params.orderHash.toHex())
-	order.cumulativeValue     = event.params.value
+	let order = LendOrder.load(event.params.orderHash.toHex())
+	let token = Token.load(order.token)
+	order.cumulativeValue     = tokenValue(event.params.value, token.decimals as u8)
 	order.cumulativeTimestamp = event.params.updatedTill
 	order.save()
 
-	let e = new ReserveOrderCumulativeUpdate(createEventID(event))
+	let e = new LendOrderCumulativeUpdate(createEventID(event))
 	e.transaction = logTransaction(event).id
 	e.timestamp   = event.block.timestamp
 	e.order       = order.id
-	e.value       = event.params.value
+	e.value       = tokenValue(event.params.value, token.decimals as u8)
 	e.save()
 }
 
 export function handleLogReserveValuesUpdated(event: LogReserveValuesUpdatedEvent): void
 {
-	let e = new ReserveValuesUpdated(createEventID(event))
-	e.transaction = logTransaction(event).id
+	let token       = Token.load(event.params.token.toHex())
+	let transaction = logTransaction(event)
+
+	let el = new TokenReserve(token.symbol.toString().concat('-latest'))
+	el.transaction = transaction.id
+	el.timestamp   = event.block.timestamp
+	el.token       = event.params.token.toHex()
+	el.reserve     = tokenValue(event.params.reserve, token.decimals as u8)
+	el.profit      = tokenValue(event.params.profit, token.decimals as u8)
+	el.loss        = tokenValue(event.params.loss, token.decimals as u8)
+	el.save()
+
+	let e = new TokenReserve(token.symbol.concat('-').concat(createEventID(event)))
+	e.transaction = transaction.id
 	e.timestamp   = event.block.timestamp
 	e.token       = event.params.token.toHex()
-	e.reserve     = event.params.reserve
-	e.profit      = event.params.profit
-	e.loss        = event.params.loss
+	e.reserve     = tokenValue(event.params.reserve, token.decimals as u8)
+	e.profit      = tokenValue(event.params.profit, token.decimals as u8)
+	e.loss        = tokenValue(event.params.loss, token.decimals as u8)
 	e.save()
 }

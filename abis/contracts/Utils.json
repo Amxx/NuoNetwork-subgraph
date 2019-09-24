@@ -3,29 +3,29 @@
   "abi": [],
   "bytecode": "0x6080604052348015600f57600080fd5b50603580601d6000396000f3006080604052600080fd00a165627a7a723058201393148d83e8cc4655cc25b3680d1c6186973911e2a57a58cdec4e55155b8cd30029",
   "deployedBytecode": "0x6080604052600080fd00a165627a7a723058201393148d83e8cc4655cc25b3680d1c6186973911e2a57a58cdec4e55155b8cd30029",
-  "sourceMap": "25:152:13:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;25:152:13;;;;;;;",
-  "deployedSourceMap": "25:152:13:-;;;;;",
+  "sourceMap": "25:152:11:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;25:152:11;;;;;;;",
+  "deployedSourceMap": "25:152:11:-;;;;;",
   "source": "pragma solidity 0.4.24;\n\ncontract Utils {\n\n    modifier addressValid(address _address) {\n        require(_address != address(0), \"Utils::_ INVALID_ADDRESS\");\n        _;\n    }\n\n}",
   "sourcePath": "/home/amxx/Work/subgraphs/nuo-audited-contracts/contracts/Utils.sol",
   "ast": {
     "absolutePath": "/home/amxx/Work/subgraphs/nuo-audited-contracts/contracts/Utils.sol",
     "exportedSymbols": {
       "Utils": [
-        8692
+        7620
       ]
     },
-    "id": 8693,
+    "id": 7621,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 8676,
+        "id": 7604,
         "literals": [
           "solidity",
           "0.4",
           ".24"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:23:13"
+        "src": "0:23:11"
       },
       {
         "baseContracts": [],
@@ -33,18 +33,18 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 8692,
+        "id": 7620,
         "linearizedBaseContracts": [
-          8692
+          7620
         ],
         "name": "Utils",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 8690,
+              "id": 7618,
               "nodeType": "Block",
-              "src": "87:87:13",
+              "src": "87:87:11",
               "statements": [
                 {
                   "expression": {
@@ -56,19 +56,19 @@
                           "typeIdentifier": "t_address",
                           "typeString": "address"
                         },
-                        "id": 8685,
+                        "id": 7613,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
                         "lValueRequested": false,
                         "leftExpression": {
                           "argumentTypes": null,
-                          "id": 8681,
+                          "id": 7609,
                           "name": "_address",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 8678,
-                          "src": "105:8:13",
+                          "referencedDeclaration": 7606,
+                          "src": "105:8:11",
                           "typeDescriptions": {
                             "typeIdentifier": "t_address",
                             "typeString": "address"
@@ -82,14 +82,14 @@
                             {
                               "argumentTypes": null,
                               "hexValue": "30",
-                              "id": 8683,
+                              "id": 7611,
                               "isConstant": false,
                               "isLValue": false,
                               "isPure": true,
                               "kind": "number",
                               "lValueRequested": false,
                               "nodeType": "Literal",
-                              "src": "125:1:13",
+                              "src": "125:1:11",
                               "subdenomination": null,
                               "typeDescriptions": {
                                 "typeIdentifier": "t_rational_0_by_1",
@@ -105,20 +105,20 @@
                                 "typeString": "int_const 0"
                               }
                             ],
-                            "id": 8682,
+                            "id": 7610,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": true,
                             "lValueRequested": false,
                             "nodeType": "ElementaryTypeNameExpression",
-                            "src": "117:7:13",
+                            "src": "117:7:11",
                             "typeDescriptions": {
                               "typeIdentifier": "t_type$_t_address_$",
                               "typeString": "type(address)"
                             },
                             "typeName": "address"
                           },
-                          "id": 8684,
+                          "id": 7612,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
@@ -126,13 +126,13 @@
                           "lValueRequested": false,
                           "names": [],
                           "nodeType": "FunctionCall",
-                          "src": "117:10:13",
+                          "src": "117:10:11",
                           "typeDescriptions": {
                             "typeIdentifier": "t_address",
                             "typeString": "address"
                           }
                         },
-                        "src": "105:22:13",
+                        "src": "105:22:11",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bool",
                           "typeString": "bool"
@@ -141,14 +141,14 @@
                       {
                         "argumentTypes": null,
                         "hexValue": "5574696c733a3a5f20494e56414c49445f41444452455353",
-                        "id": 8686,
+                        "id": 7614,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
                         "kind": "string",
                         "lValueRequested": false,
                         "nodeType": "Literal",
-                        "src": "129:26:13",
+                        "src": "129:26:11",
                         "subdenomination": null,
                         "typeDescriptions": {
                           "typeIdentifier": "t_stringliteral_89153219d8992837dece9463f4628847a52b05679c4e4381841663ed8c310cb5",
@@ -168,21 +168,21 @@
                           "typeString": "literal_string \"Utils::_ INVALID_ADDRESS\""
                         }
                       ],
-                      "id": 8680,
+                      "id": 7608,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        12217,
-                        12218
+                        9857,
+                        9858
                       ],
-                      "referencedDeclaration": 12218,
-                      "src": "97:7:13",
+                      "referencedDeclaration": 9858,
+                      "src": "97:7:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
                         "typeString": "function (bool,string memory) pure"
                       }
                     },
-                    "id": 8687,
+                    "id": 7615,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -190,38 +190,38 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "97:59:13",
+                    "src": "97:59:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 8688,
+                  "id": 7616,
                   "nodeType": "ExpressionStatement",
-                  "src": "97:59:13"
+                  "src": "97:59:11"
                 },
                 {
-                  "id": 8689,
+                  "id": 7617,
                   "nodeType": "PlaceholderStatement",
-                  "src": "166:1:13"
+                  "src": "166:1:11"
                 }
               ]
             },
             "documentation": null,
-            "id": 8691,
+            "id": 7619,
             "name": "addressValid",
             "nodeType": "ModifierDefinition",
             "parameters": {
-              "id": 8679,
+              "id": 7607,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 8678,
+                  "id": 7606,
                   "name": "_address",
                   "nodeType": "VariableDeclaration",
-                  "scope": 8691,
-                  "src": "69:16:13",
+                  "scope": 7619,
+                  "src": "69:16:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -229,10 +229,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 8677,
+                    "id": 7605,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "69:7:13",
+                    "src": "69:7:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
@@ -242,37 +242,37 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "68:18:13"
+              "src": "68:18:11"
             },
-            "src": "47:127:13",
+            "src": "47:127:11",
             "visibility": "internal"
           }
         ],
-        "scope": 8693,
-        "src": "25:152:13"
+        "scope": 7621,
+        "src": "25:152:11"
       }
     ],
-    "src": "0:177:13"
+    "src": "0:177:11"
   },
   "legacyAST": {
     "absolutePath": "/home/amxx/Work/subgraphs/nuo-audited-contracts/contracts/Utils.sol",
     "exportedSymbols": {
       "Utils": [
-        8692
+        7620
       ]
     },
-    "id": 8693,
+    "id": 7621,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 8676,
+        "id": 7604,
         "literals": [
           "solidity",
           "0.4",
           ".24"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:23:13"
+        "src": "0:23:11"
       },
       {
         "baseContracts": [],
@@ -280,18 +280,18 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 8692,
+        "id": 7620,
         "linearizedBaseContracts": [
-          8692
+          7620
         ],
         "name": "Utils",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 8690,
+              "id": 7618,
               "nodeType": "Block",
-              "src": "87:87:13",
+              "src": "87:87:11",
               "statements": [
                 {
                   "expression": {
@@ -303,19 +303,19 @@
                           "typeIdentifier": "t_address",
                           "typeString": "address"
                         },
-                        "id": 8685,
+                        "id": 7613,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
                         "lValueRequested": false,
                         "leftExpression": {
                           "argumentTypes": null,
-                          "id": 8681,
+                          "id": 7609,
                           "name": "_address",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 8678,
-                          "src": "105:8:13",
+                          "referencedDeclaration": 7606,
+                          "src": "105:8:11",
                           "typeDescriptions": {
                             "typeIdentifier": "t_address",
                             "typeString": "address"
@@ -329,14 +329,14 @@
                             {
                               "argumentTypes": null,
                               "hexValue": "30",
-                              "id": 8683,
+                              "id": 7611,
                               "isConstant": false,
                               "isLValue": false,
                               "isPure": true,
                               "kind": "number",
                               "lValueRequested": false,
                               "nodeType": "Literal",
-                              "src": "125:1:13",
+                              "src": "125:1:11",
                               "subdenomination": null,
                               "typeDescriptions": {
                                 "typeIdentifier": "t_rational_0_by_1",
@@ -352,20 +352,20 @@
                                 "typeString": "int_const 0"
                               }
                             ],
-                            "id": 8682,
+                            "id": 7610,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": true,
                             "lValueRequested": false,
                             "nodeType": "ElementaryTypeNameExpression",
-                            "src": "117:7:13",
+                            "src": "117:7:11",
                             "typeDescriptions": {
                               "typeIdentifier": "t_type$_t_address_$",
                               "typeString": "type(address)"
                             },
                             "typeName": "address"
                           },
-                          "id": 8684,
+                          "id": 7612,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
@@ -373,13 +373,13 @@
                           "lValueRequested": false,
                           "names": [],
                           "nodeType": "FunctionCall",
-                          "src": "117:10:13",
+                          "src": "117:10:11",
                           "typeDescriptions": {
                             "typeIdentifier": "t_address",
                             "typeString": "address"
                           }
                         },
-                        "src": "105:22:13",
+                        "src": "105:22:11",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bool",
                           "typeString": "bool"
@@ -388,14 +388,14 @@
                       {
                         "argumentTypes": null,
                         "hexValue": "5574696c733a3a5f20494e56414c49445f41444452455353",
-                        "id": 8686,
+                        "id": 7614,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
                         "kind": "string",
                         "lValueRequested": false,
                         "nodeType": "Literal",
-                        "src": "129:26:13",
+                        "src": "129:26:11",
                         "subdenomination": null,
                         "typeDescriptions": {
                           "typeIdentifier": "t_stringliteral_89153219d8992837dece9463f4628847a52b05679c4e4381841663ed8c310cb5",
@@ -415,21 +415,21 @@
                           "typeString": "literal_string \"Utils::_ INVALID_ADDRESS\""
                         }
                       ],
-                      "id": 8680,
+                      "id": 7608,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        12217,
-                        12218
+                        9857,
+                        9858
                       ],
-                      "referencedDeclaration": 12218,
-                      "src": "97:7:13",
+                      "referencedDeclaration": 9858,
+                      "src": "97:7:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
                         "typeString": "function (bool,string memory) pure"
                       }
                     },
-                    "id": 8687,
+                    "id": 7615,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -437,38 +437,38 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "97:59:13",
+                    "src": "97:59:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 8688,
+                  "id": 7616,
                   "nodeType": "ExpressionStatement",
-                  "src": "97:59:13"
+                  "src": "97:59:11"
                 },
                 {
-                  "id": 8689,
+                  "id": 7617,
                   "nodeType": "PlaceholderStatement",
-                  "src": "166:1:13"
+                  "src": "166:1:11"
                 }
               ]
             },
             "documentation": null,
-            "id": 8691,
+            "id": 7619,
             "name": "addressValid",
             "nodeType": "ModifierDefinition",
             "parameters": {
-              "id": 8679,
+              "id": 7607,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 8678,
+                  "id": 7606,
                   "name": "_address",
                   "nodeType": "VariableDeclaration",
-                  "scope": 8691,
-                  "src": "69:16:13",
+                  "scope": 7619,
+                  "src": "69:16:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -476,10 +476,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 8677,
+                    "id": 7605,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "69:7:13",
+                    "src": "69:7:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
@@ -489,17 +489,17 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "68:18:13"
+              "src": "68:18:11"
             },
-            "src": "47:127:13",
+            "src": "47:127:11",
             "visibility": "internal"
           }
         ],
-        "scope": 8693,
-        "src": "25:152:13"
+        "scope": 7621,
+        "src": "25:152:11"
       }
     ],
-    "src": "0:177:13"
+    "src": "0:177:11"
   },
   "compiler": {
     "name": "solc",
@@ -507,5 +507,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.1",
-  "updatedAt": "2019-09-23T18:55:29.348Z"
+  "updatedAt": "2019-09-24T21:09:49.848Z"
 }
