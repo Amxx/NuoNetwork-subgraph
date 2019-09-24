@@ -25,7 +25,6 @@ import {
 	createAccountUserID,
 	createEventID,
 	createToken,
-	tokenValue,
 } from './utils'
 
 export function handleLogImplChanged(event: LogImplChangedEvent): void
@@ -41,30 +40,26 @@ export function handleLogImplChanged(event: LogImplChangedEvent): void
 
 export function handleLogTransferBySystem(event: LogTransferBySystemEvent): void
 {
-	let token = createToken(event.params.token);
-
 	let e = new AccountTransferBySystem(createEventID(event))
 	e.transaction = logTransaction(event).id
 	e.timestamp   = event.block.timestamp
-	e.token       = token.id
+	e.token       = event.params.token.toHex()
 	e.from        = event.address.toHex()
 	e.to          = event.params.to
-	e.value       = tokenValue(event.params.value, token.decimals as u8)
+	e.value       = event.params.value
 	e.by          = event.params.by
 	e.save()
 }
 
 export function handleLogTransferByUser(event: LogTransferByUserEvent): void
 {
-	let token = createToken(event.params.token);
-
 	let e = new AccountTransferBySystem(createEventID(event))
 	e.transaction = logTransaction(event).id
 	e.timestamp   = event.block.timestamp
-	e.token       = token.id
+	e.token       = event.params.token.toHex()
 	e.from        = event.address.toHex()
 	e.to          = event.params.to
-	e.value       = tokenValue(event.params.value, token.decimals as u8)
+	e.value       = event.params.value
 	e.by          = event.params.by
 	e.save()
 }

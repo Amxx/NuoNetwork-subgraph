@@ -22,21 +22,18 @@ import {
 import {
 	logTransaction,
 	createEventID,
-	tokenValue,
 } from './utils'
 
 export function handleLogOrderCreated(event: LogOrderCreatedEvent): void
 {
-	let token = Token.load(event.params.token.toHex())
-
 	let order = new LendOrder(event.params.orderHash.toHex())
 	order.status              = 'ACTIVE'
 	order.account             = event.params.account.toHex()
-	order.token               = token.id
+	order.token               = event.params.token.toHex()
 	order.byUser              = event.params.byUser.toHex()
-	order.createdValue        = tokenValue(event.params.value, token.decimals as u8)
+	order.createdValue        = event.params.value
 	order.createdTimestamp    = event.block.timestamp
-	order.cumulativeValue     = tokenValue(event.params.value, token.decimals as u8)
+	order.cumulativeValue     = event.params.value
 	order.cumulativeTimestamp = event.block.timestamp
 	order.expirationTimestamp = event.params.expirationTimestamp
 	order.save()
@@ -64,9 +61,8 @@ export function handleLogOrderCancelled(event: LogOrderCancelledEvent): void
 
 export function handleLogOrderCumulativeUpdated(event: LogOrderCumulativeUpdatedEvent): void
 {
-	let order = LendOrder.load(event.params.orderHash.toHex())
-	let token = Token.load(order.token)
-	order.cumulativeValue     = tokenValue(event.params.value, token.decimals as u8)
+	let order = new LendOrder(event.params.orderHash.toHex())
+	order.cumulativeValue     = event.params.value
 	order.cumulativeTimestamp = event.params.updatedTill
 	order.save()
 
@@ -74,30 +70,20 @@ export function handleLogOrderCumulativeUpdated(event: LogOrderCumulativeUpdated
 	e.transaction = logTransaction(event).id
 	e.timestamp   = event.block.timestamp
 	e.order       = order.id
-	e.value       = tokenValue(event.params.value, token.decimals as u8)
+	e.value       = event.params.value
 	e.save()
 }
 
 export function handleLogReserveValuesUpdated(event: LogReserveValuesUpdatedEvent): void
 {
-	let token       = Token.load(event.params.token.toHex())
 	let transaction = logTransaction(event)
 
-	let el = new TokenReserve(token.symbol.toString().concat('-latest'))
-	el.transaction = transaction.id
-	el.timestamp   = event.block.timestamp
-	el.token       = event.params.token.toHex()
-	el.reserve     = tokenValue(event.params.reserve, token.decimals as u8)
-	el.profit      = tokenValue(event.params.profit, token.decimals as u8)
-	el.loss        = tokenValue(event.params.loss, token.decimals as u8)
-	el.save()
-
-	let e = new TokenReserve(token.symbol.concat('-').concat(createEventID(event)))
+	let e = new TokenReserve(createEventID(event))
 	e.transaction = transaction.id
 	e.timestamp   = event.block.timestamp
 	e.token       = event.params.token.toHex()
-	e.reserve     = tokenValue(event.params.reserve, token.decimals as u8)
-	e.profit      = tokenValue(event.params.profit, token.decimals as u8)
-	e.loss        = tokenValue(event.params.loss, token.decimals as u8)
+	e.reserve     = event.params.reserve
+	e.profit      = event.params.profit
+	e.loss        = event.params.loss
 	e.save()
 }

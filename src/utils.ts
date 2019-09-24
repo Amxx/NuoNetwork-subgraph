@@ -1,8 +1,6 @@
 import {
 	Address,
 	Bytes,
-	BigInt,
-	BigDecimal,
 	EthereumEvent,
 } from '@graphprotocol/graph-ts'
 
@@ -20,7 +18,7 @@ export function logTransaction(event: EthereumEvent): Transaction
 	let tx = new Transaction(event.transaction.hash.toHex())
 	tx.from        = event.transaction.from as Bytes
 	tx.to          = event.transaction.to as Bytes
-	tx.value       = tokenValue(event.transaction.value, 18)
+	tx.value       = event.transaction.value
 	tx.gasUsed     = event.transaction.gasUsed
 	tx.gasPrice    = event.transaction.gasPrice
 	tx.timestamp   = event.block.timestamp
@@ -51,9 +49,4 @@ export function createToken(address: Address): Token
 	token.decimals = decimals.reverted ? 0               : decimals.value
 	token.save()
 	return token;
-}
-
-export function tokenValue(value: BigInt, decimals: u8): BigDecimal
-{
-	return value.toBigDecimal().div(BigInt.fromI32(10 as i32).pow(decimals).toBigDecimal())
 }

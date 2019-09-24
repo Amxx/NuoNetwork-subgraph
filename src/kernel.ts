@@ -15,24 +15,20 @@ import {
 import {
 	logTransaction,
 	createEventID,
-	tokenValue,
 } from './utils'
 
 export function handleLogOrderCreated(event: LogOrderCreatedEvent): void
 {
-	let principal  = Token.load(event.params.principalToken.toHex())
-	let collateral = Token.load(event.params.collateralToken.toHex())
-
 	let order = new BorrowOrder(event.params.orderHash.toHex())
 	order.status              = 'ACTIVE'
 	order.account             = event.params.account.toHex()
 	order.byUser              = event.params.byUser.toHex()
-	order.principalToken      = principal.id
-	order.principalAmount     = tokenValue(event.params.principalAmount, principal.decimals as u8)
-	order.collateralToken     = collateral.id
-	order.collateralAmount    = tokenValue(event.params.collateralAmount, collateral.decimals as u8)
-	order.premium             = tokenValue(event.params.premium, 18)
-	order.fee                 = tokenValue(event.params.fee, principal.decimals as u8)
+	order.principalToken      = event.params.principalToken.toHex()
+	order.principalAmount     = event.params.principalAmount
+	order.collateralToken     = event.params.collateralToken.toHex()
+	order.collateralAmount    = event.params.collateralAmount
+	order.premium             = event.params.premium
+	order.fee                 = event.params.fee
 	order.createdTimestamp    = event.block.timestamp
 	order.expirationTimestamp = event.params.expirationTimestamp
 	order.save()
@@ -46,7 +42,7 @@ export function handleLogOrderCreated(event: LogOrderCreatedEvent): void
 
 export function handleLogOrderRepaid(event: LogOrderRepaidEvent): void
 {
-	let order = BorrowOrder.load(event.params.orderHash.toHex())
+	let order = new BorrowOrder(event.params.orderHash.toHex())
 	order.status = 'REPAID'
 	order.save()
 
@@ -54,7 +50,7 @@ export function handleLogOrderRepaid(event: LogOrderRepaidEvent): void
 	e.transaction = logTransaction(event).id
 	e.timestamp   = event.block.timestamp
 	e.order       = order.id
-	e.valueRepaid = tokenValue(event.params.valueRepaid, Token.load(order.principalToken).decimals as u8)
+	e.valueRepaid = event.params.valueRepaid
 	e.save()
 }
 
