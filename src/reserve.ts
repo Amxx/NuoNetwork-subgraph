@@ -1,5 +1,3 @@
-import { store } from '@graphprotocol/graph-ts'
-
 import {
 	ReserveOrder,
 	ReserveOrderCreated,

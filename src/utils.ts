@@ -9,7 +9,6 @@ import {
 	Transaction,
 } from '../generated/schema'
 
-
 export function logTransaction(event: EthereumEvent): Transaction
 {
 	let tx = new Transaction(event.transaction.hash.toHex());
