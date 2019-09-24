@@ -1,0 +1,140 @@
+specVersion: 0.0.2
+description: NuoNetwork
+repository: https://github.com/Amxx/NuoNetwork-subgraph
+schema:
+  file: ./schema.graphql
+dataSources:
+  - name: AccountFactory
+    kind: ethereum/contract
+    network: mainnet
+    source:
+      address: '0xf5a38fbc26c720c79350b99d9c0bd42b3e9b8316'
+      abi: AccountFactory
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.3
+      language: wasm/assemblyscript
+      entities:
+        - Account
+        - User
+        - AccountUser
+      abis:
+        - name: AccountFactory
+          file: abis/contracts/AccountFactory.json
+      eventHandlers:
+        - event: LogAccountCreated(indexed address,indexed address,address)
+          handler: handleLogAccountCreatedV2
+      file: ./src/accountfactory.ts
+
+  - name: AccountFactoryV2
+    kind: ethereum/contract
+    network: mainnet
+    source:
+      address: '0x4e9d7f37eadc6fef64b5f5dccc4deb6224667677'
+      abi: AccountFactoryV2
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.3
+      language: wasm/assemblyscript
+      entities:
+        - Account
+        - User
+        - AccountUser
+      abis:
+        - name: AccountFactoryV2
+          file: abis/contracts/AccountFactoryV2.json
+      eventHandlers:
+        - event: LogAccountCreated(indexed address,indexed address,address)
+          handler: handleLogAccountCreated
+      file: ./src/accountfactory.ts
+
+  - name: Reserve
+    kind: ethereum/contract
+    network: mainnet
+    source:
+      address: '0x64d14595152b430cf6940da15c6e39545c7c5b7e'
+      abi: Reserve
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.3
+      language: wasm/assemblyscript
+      entities:
+        - ReserveOrder
+        - ReserveOrderCancelled
+        - ReserveOrderCumulativeUpdate
+        - ReserveValuesUpdated
+      abis:
+        - name: Reserve
+          file: abis/contracts/Reserve.json
+      eventHandlers:
+        - event: LogOrderCreated(indexed bytes32,indexed address,indexed address,address,uint256,uint256)
+          handler: handleLogOrderCreated
+        - event: LogOrderCancelled(indexed bytes32,indexed address)
+          handler: handleLogOrderCancelled
+        - event: LogOrderCumulativeUpdated(indexed bytes32,uint256,uint256)
+          handler: handleLogOrderCumulativeUpdated
+        - event: LogReserveValuesUpdated(indexed address,indexed uint256,uint256,uint256,uint256)
+          handler: handleLogReserveValuesUpdated
+      file: ./src/reserve.ts
+
+  - name: Kernel
+    kind: ethereum/contract
+    network: mainnet
+    source:
+      address: '0x64d14595152b430cf6940da15c6e39545c7c5b7e'
+      abi: Kernel
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.3
+      language: wasm/assemblyscript
+      entities:
+        - KernelOrder
+        - KernelOrderRepaid
+        - KernelOrderDefaulted
+      abis:
+        - name: Kernel
+          file: abis/contracts/Kernel.json
+      eventHandlers:
+        - event: LogOrderCreated(indexed bytes32,indexed address,indexed address,address,address,uint256,uint256,uint256,uint256,uint256)
+          handler: handleLogOrderCreated
+        - event: LogOrderRepaid(indexed bytes32,uint256)
+          handler: handleLogOrderRepaid
+        - event: LogOrderDefaulted(indexed bytes32,string)
+          handler: handleLogOrderDefaulted
+      file: ./src/kernel.ts
+
+templates:
+  - name: Account
+    kind: ethereum/contract
+    network: mainnet
+    source:
+      abi: Account
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.3
+      language: wasm/assemblyscript
+      entities:
+        - Token
+        - Account
+        - User
+        - AccountUser
+        - LogImplChanged
+        - LogTransferBySystem
+        - LogTransferByUser
+        - LogUserAdded
+        - LogUserRemoved
+      abis:
+        - name: Account
+          file: abis/contracts/Account.json
+      eventHandlers:
+        - event: LogImplChanged(indexed address,indexed address)
+          handler: handleLogImplChanged
+        - event: LogTransferBySystem(indexed address,indexed address,uint256,address)
+          handler: handleLogTransferBySystem
+        - event: LogTransferByUser(indexed address,indexed address,uint256,address)
+          handler: handleLogTransferByUser
+        - event: LogUserAdded(indexed address,address)
+          handler: handleLogUserAdded
+        - event: LogUserRemoved(indexed address,address)
+          handler: handleLogUserRemoved
+      file: ./src/account.ts

@@ -1,0 +1,611 @@
+{
+  "contractName": "Utils2",
+  "abi": [],
+  "bytecode": "0x6080604052348015600f57600080fd5b50603580601d6000396000f3006080604052600080fd00a165627a7a72305820c05cc1684d40604170269794bc5277bc8a5ec242ab850fca00984dc32e77c6230029",
+  "deployedBytecode": "0x6080604052600080fd00a165627a7a72305820c05cc1684d40604170269794bc5277bc8a5ec242ab850fca00984dc32e77c6230029",
+  "sourceMap": "83:263:14:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;83:263:14;;;;;;;",
+  "deployedSourceMap": "83:263:14:-;;;;;",
+  "source": "pragma solidity 0.4.24;\n\nimport \"openzeppelin-solidity/contracts/ECRecovery.sol\";\n\ncontract Utils2 {\n    using ECRecovery for bytes32;\n    \n    function _recoverSigner(bytes32 _hash, bytes _signature) \n        internal\n        pure\n        returns(address _signer)\n    {\n        return _hash.toEthSignedMessageHash().recover(_signature);\n    }\n\n}",
+  "sourcePath": "/home/amxx/Work/subgraphs/nuo-audited-contracts/contracts/Utils2.sol",
+  "ast": {
+    "absolutePath": "/home/amxx/Work/subgraphs/nuo-audited-contracts/contracts/Utils2.sol",
+    "exportedSymbols": {
+      "Utils2": [
+        8716
+      ]
+    },
+    "id": 8717,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 8694,
+        "literals": [
+          "solidity",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:14"
+      },
+      {
+        "absolutePath": "openzeppelin-solidity/contracts/ECRecovery.sol",
+        "file": "openzeppelin-solidity/contracts/ECRecovery.sol",
+        "id": 8695,
+        "nodeType": "ImportDirective",
+        "scope": 8717,
+        "sourceUnit": 11688,
+        "src": "25:56:14",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 8716,
+        "linearizedBaseContracts": [
+          8716
+        ],
+        "name": "Utils2",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "id": 8698,
+            "libraryName": {
+              "contractScope": null,
+              "id": 8696,
+              "name": "ECRecovery",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 11687,
+              "src": "111:10:14",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_ECRecovery_$11687",
+                "typeString": "library ECRecovery"
+              }
+            },
+            "nodeType": "UsingForDirective",
+            "src": "105:29:14",
+            "typeName": {
+              "id": 8697,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "126:7:14",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            }
+          },
+          {
+            "body": {
+              "id": 8714,
+              "nodeType": "Block",
+              "src": "269:74:14",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 8711,
+                        "name": "_signature",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 8702,
+                        "src": "325:10:14",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "arguments": [],
+                        "expression": {
+                          "argumentTypes": [],
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 8707,
+                            "name": "_hash",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 8700,
+                            "src": "286:5:14",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_bytes32",
+                              "typeString": "bytes32"
+                            }
+                          },
+                          "id": 8708,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "toEthSignedMessageHash",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 11686,
+                          "src": "286:28:14",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_internal_pure$_t_bytes32_$returns$_t_bytes32_$bound_to$_t_bytes32_$",
+                            "typeString": "function (bytes32) pure returns (bytes32)"
+                          }
+                        },
+                        "id": 8709,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "286:30:14",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      },
+                      "id": 8710,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "recover",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 11670,
+                      "src": "286:38:14",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_pure$_t_bytes32_$_t_bytes_memory_ptr_$returns$_t_address_$bound_to$_t_bytes32_$",
+                        "typeString": "function (bytes32,bytes memory) pure returns (address)"
+                      }
+                    },
+                    "id": 8712,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "286:50:14",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "functionReturnParameters": 8706,
+                  "id": 8713,
+                  "nodeType": "Return",
+                  "src": "279:57:14"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 8715,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "_recoverSigner",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 8703,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 8700,
+                  "name": "_hash",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 8715,
+                  "src": "168:13:14",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 8699,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "168:7:14",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 8702,
+                  "name": "_signature",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 8715,
+                  "src": "183:16:14",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 8701,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "183:5:14",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "167:33:14"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 8706,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 8705,
+                  "name": "_signer",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 8715,
+                  "src": "248:15:14",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 8704,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "248:7:14",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "247:17:14"
+            },
+            "scope": 8716,
+            "src": "144:199:14",
+            "stateMutability": "pure",
+            "superFunction": null,
+            "visibility": "internal"
+          }
+        ],
+        "scope": 8717,
+        "src": "83:263:14"
+      }
+    ],
+    "src": "0:346:14"
+  },
+  "legacyAST": {
+    "absolutePath": "/home/amxx/Work/subgraphs/nuo-audited-contracts/contracts/Utils2.sol",
+    "exportedSymbols": {
+      "Utils2": [
+        8716
+      ]
+    },
+    "id": 8717,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 8694,
+        "literals": [
+          "solidity",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:14"
+      },
+      {
+        "absolutePath": "openzeppelin-solidity/contracts/ECRecovery.sol",
+        "file": "openzeppelin-solidity/contracts/ECRecovery.sol",
+        "id": 8695,
+        "nodeType": "ImportDirective",
+        "scope": 8717,
+        "sourceUnit": 11688,
+        "src": "25:56:14",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 8716,
+        "linearizedBaseContracts": [
+          8716
+        ],
+        "name": "Utils2",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "id": 8698,
+            "libraryName": {
+              "contractScope": null,
+              "id": 8696,
+              "name": "ECRecovery",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 11687,
+              "src": "111:10:14",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_ECRecovery_$11687",
+                "typeString": "library ECRecovery"
+              }
+            },
+            "nodeType": "UsingForDirective",
+            "src": "105:29:14",
+            "typeName": {
+              "id": 8697,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "126:7:14",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            }
+          },
+          {
+            "body": {
+              "id": 8714,
+              "nodeType": "Block",
+              "src": "269:74:14",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 8711,
+                        "name": "_signature",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 8702,
+                        "src": "325:10:14",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "arguments": [],
+                        "expression": {
+                          "argumentTypes": [],
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 8707,
+                            "name": "_hash",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 8700,
+                            "src": "286:5:14",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_bytes32",
+                              "typeString": "bytes32"
+                            }
+                          },
+                          "id": 8708,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "toEthSignedMessageHash",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 11686,
+                          "src": "286:28:14",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_internal_pure$_t_bytes32_$returns$_t_bytes32_$bound_to$_t_bytes32_$",
+                            "typeString": "function (bytes32) pure returns (bytes32)"
+                          }
+                        },
+                        "id": 8709,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "286:30:14",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      },
+                      "id": 8710,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "recover",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 11670,
+                      "src": "286:38:14",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_pure$_t_bytes32_$_t_bytes_memory_ptr_$returns$_t_address_$bound_to$_t_bytes32_$",
+                        "typeString": "function (bytes32,bytes memory) pure returns (address)"
+                      }
+                    },
+                    "id": 8712,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "286:50:14",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "functionReturnParameters": 8706,
+                  "id": 8713,
+                  "nodeType": "Return",
+                  "src": "279:57:14"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 8715,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "_recoverSigner",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 8703,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 8700,
+                  "name": "_hash",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 8715,
+                  "src": "168:13:14",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 8699,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "168:7:14",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 8702,
+                  "name": "_signature",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 8715,
+                  "src": "183:16:14",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 8701,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "183:5:14",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "167:33:14"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 8706,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 8705,
+                  "name": "_signer",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 8715,
+                  "src": "248:15:14",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 8704,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "248:7:14",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "247:17:14"
+            },
+            "scope": 8716,
+            "src": "144:199:14",
+            "stateMutability": "pure",
+            "superFunction": null,
+            "visibility": "internal"
+          }
+        ],
+        "scope": 8717,
+        "src": "83:263:14"
+      }
+    ],
+    "src": "0:346:14"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "2.0.1",
+  "updatedAt": "2019-09-23T18:55:29.352Z"
+}

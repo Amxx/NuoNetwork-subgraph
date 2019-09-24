@@ -1,0 +1,3885 @@
+{
+  "contractName": "MockReserve",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "shouldLockPullFromAccount",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "accountFactory",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "shouldLockPullFromEscrow",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "escrow",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "_escrow",
+          "type": "address"
+        },
+        {
+          "name": "_accountFactory",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "allowLockPullFromAccount",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "allowLockPullFromEscrow",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_token",
+          "type": "address"
+        },
+        {
+          "name": "_to",
+          "type": "address"
+        },
+        {
+          "name": "_value",
+          "type": "uint256"
+        }
+      ],
+      "name": "release",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_token",
+          "type": "address"
+        },
+        {
+          "name": "_from",
+          "type": "address"
+        },
+        {
+          "name": "_value",
+          "type": "uint256"
+        },
+        {
+          "name": "_profit",
+          "type": "uint256"
+        },
+        {
+          "name": "_loss",
+          "type": "uint256"
+        }
+      ],
+      "name": "lock",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_from",
+          "type": "address"
+        },
+        {
+          "name": "_forToken",
+          "type": "address"
+        },
+        {
+          "name": "_token",
+          "type": "address"
+        },
+        {
+          "name": "_value",
+          "type": "uint256"
+        }
+      ],
+      "name": "lockSurplus",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x60806040526001805460a860020a60ff021960a060020a60ff0219909116740100000000000000000000000000000000000000001716905534801561004357600080fd5b506040516040806105fe83398101604052805160209091015160008054600160a060020a03938416600160a060020a031991821617909155600180549390921692169190911790556105648061009a6000396000f3006080604052600436106100985763ffffffff7c01000000000000000000000000000000000000000000000000000000006000350416630e2fa5a7811461009d578063106689a5146100c65780633679e4ef146100f857806342bb43dd1461010d578063687cd9c11461013d57806380d7bff01461016e5780638bfb07c914610183578063bb5bc55b146101ad578063e2fdcc17146101c2575b600080fd5b3480156100a957600080fd5b506100b26101d7565b604080519115158252519081900360200190f35b3480156100d257600080fd5b506100f6600160a060020a03600435811690602435166044356064356084356101f8565b005b34801561010457600080fd5b506100f661034e565b34801561011957600080fd5b506100f6600160a060020a0360043581169060243581169060443516606435610387565b34801561014957600080fd5b50610152610416565b60408051600160a060020a039092168252519081900360200190f35b34801561017a57600080fd5b506100f6610425565b34801561018f57600080fd5b506100f6600160a060020a0360043581169060243516604435610477565b3480156101b957600080fd5b506100b2610507565b3480156101ce57600080fd5b50610152610529565b60015474010000000000000000000000000000000000000000900460ff1681565b60015474010000000000000000000000000000000000000000900460ff16156102b25760008054604080517f5e61e1c8000000000000000000000000000000000000000000000000000000008152600160a060020a0388811660048301528981166024830152909216604483018190526064830187905290519092635e61e1c8926084808201939182900301818387803b15801561029557600080fd5b505af11580156102a9573d6000803e3d6000fd5b50505050610347565b6001547501000000000000000000000000000000000000000000900460ff16156100985760008054604080517fbeabacc8000000000000000000000000000000000000000000000000000000008152600160a060020a03898116600483015292831660248201526044810187905290519187169263beabacc89260648084019382900301818387803b15801561029557600080fd5b5050505050565b6001805475ffff000000000000000000000000000000000000000019167501000000000000000000000000000000000000000000179055565b60008054604080517fbeabacc8000000000000000000000000000000000000000000000000000000008152600160a060020a03868116600483015292831660248201526044810185905290519187169263beabacc89260648084019382900301818387803b1580156103f857600080fd5b505af115801561040c573d6000803e3d6000fd5b5050505050505050565b600154600160a060020a031681565b6001805475ff0000000000000000000000000000000000000000001974ff0000000000000000000000000000000000000000199091167401000000000000000000000000000000000000000017169055565b60008054604080517fbeabacc8000000000000000000000000000000000000000000000000000000008152600160a060020a0387811660048301528681166024830152604482018690529151919092169263beabacc8926064808201939182900301818387803b1580156104ea57600080fd5b505af11580156104fe573d6000803e3d6000fd5b50505050505050565b6001547501000000000000000000000000000000000000000000900460ff1681565b600054600160a060020a0316815600a165627a7a72305820fa63eae92c719bf3edff6dadbee8eb09565579bf55d5ad901fd1a102cd5fd6510029",
+  "deployedBytecode": "0x6080604052600436106100985763ffffffff7c01000000000000000000000000000000000000000000000000000000006000350416630e2fa5a7811461009d578063106689a5146100c65780633679e4ef146100f857806342bb43dd1461010d578063687cd9c11461013d57806380d7bff01461016e5780638bfb07c914610183578063bb5bc55b146101ad578063e2fdcc17146101c2575b600080fd5b3480156100a957600080fd5b506100b26101d7565b604080519115158252519081900360200190f35b3480156100d257600080fd5b506100f6600160a060020a03600435811690602435166044356064356084356101f8565b005b34801561010457600080fd5b506100f661034e565b34801561011957600080fd5b506100f6600160a060020a0360043581169060243581169060443516606435610387565b34801561014957600080fd5b50610152610416565b60408051600160a060020a039092168252519081900360200190f35b34801561017a57600080fd5b506100f6610425565b34801561018f57600080fd5b506100f6600160a060020a0360043581169060243516604435610477565b3480156101b957600080fd5b506100b2610507565b3480156101ce57600080fd5b50610152610529565b60015474010000000000000000000000000000000000000000900460ff1681565b60015474010000000000000000000000000000000000000000900460ff16156102b25760008054604080517f5e61e1c8000000000000000000000000000000000000000000000000000000008152600160a060020a0388811660048301528981166024830152909216604483018190526064830187905290519092635e61e1c8926084808201939182900301818387803b15801561029557600080fd5b505af11580156102a9573d6000803e3d6000fd5b50505050610347565b6001547501000000000000000000000000000000000000000000900460ff16156100985760008054604080517fbeabacc8000000000000000000000000000000000000000000000000000000008152600160a060020a03898116600483015292831660248201526044810187905290519187169263beabacc89260648084019382900301818387803b15801561029557600080fd5b5050505050565b6001805475ffff000000000000000000000000000000000000000019167501000000000000000000000000000000000000000000179055565b60008054604080517fbeabacc8000000000000000000000000000000000000000000000000000000008152600160a060020a03868116600483015292831660248201526044810185905290519187169263beabacc89260648084019382900301818387803b1580156103f857600080fd5b505af115801561040c573d6000803e3d6000fd5b5050505050505050565b600154600160a060020a031681565b6001805475ff0000000000000000000000000000000000000000001974ff0000000000000000000000000000000000000000199091167401000000000000000000000000000000000000000017169055565b60008054604080517fbeabacc8000000000000000000000000000000000000000000000000000000008152600160a060020a0387811660048301528681166024830152604482018690529151919092169263beabacc8926064808201939182900301818387803b1580156104ea57600080fd5b505af11580156104fe573d6000803e3d6000fd5b50505050505050565b6001547501000000000000000000000000000000000000000000900460ff1681565b600054600160a060020a0316815600a165627a7a72305820fa63eae92c719bf3edff6dadbee8eb09565579bf55d5ad901fd1a102cd5fd6510029",
+  "sourceMap": "88:1452:36:-;;;233:4;193:44;;-1:-1:-1;;;;;;;;;;;;193:44:36;;;;;243;;;294:150;5:2:-1;;;;30:1;27;20:12;5:2;294:150:36;;;;;;;;;;;;;;;;;;;379:6;:16;;-1:-1:-1;;;;;379:16:36;;;-1:-1:-1;;;;;;379:16:36;;;;;;;;405:32;;;;;;;;;;;;;;88:1452;;;;;;",
+  "deployedSourceMap": "88:1452:36:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;193:44;;8:9:-1;5:2;;;30:1;27;20:12;5:2;193:44:36;;;;;;;;;;;;;;;;;;;;;;871:447;;8:9:-1;5:2;;;30:1;27;20:12;5:2;-1:-1;871:447:36;-1:-1:-1;;;;;871:447:36;;;;;;;;;;;;;;;;;;590:133;;8:9:-1;5:2;;;30:1;27;20:12;5:2;590:133:36;;;;1329:208;;8:9:-1;5:2;;;30:1;27;20:12;5:2;-1:-1;1329:208:36;-1:-1:-1;;;;;1329:208:36;;;;;;;;;;;;;;;;;146:40;;8:9:-1;5:2;;;30:1;27;20:12;5:2;146:40:36;;;;;;;;-1:-1:-1;;;;;146:40:36;;;;;;;;;;;;;;450:134;;8:9:-1;5:2;;;30:1;27;20:12;5:2;450:134:36;;;;730:135;;8:9:-1;5:2;;;30:1;27;20:12;5:2;-1:-1;730:135:36;-1:-1:-1;;;;;730:135:36;;;;;;;;;;;;243:44;;8:9:-1;5:2;;;30:1;27;20:12;5:2;243:44:36;;;;116:24;;8:9:-1;5:2;;;30:1;27;20:12;5:2;116:24:36;;;;193:44;;;;;;;;;:::o;871:447::-;1035:25;;;;;;;1032:280;;;1076:6;;;:66;;;;;;-1:-1:-1;;;;;1076:66:36;;;;;;;;;;;;;;:6;;;:66;;;;;;;;;;;;;;:6;;:26;;:66;;;;;;;;;;;:6;;:66;;;5:2:-1;;;;30:1;27;20:12;5:2;1076:66:36;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;1076:66:36;;;;1032:280;;;1163:24;;;;;;;1159:153;;;1246:6;;;1203:59;;;;;;-1:-1:-1;;;;;1203:59:36;;;;;;;1246:6;;;1203:59;;;;;;;;;;;;:26;;;;;;:59;;;;;;;;;;1246:6;1203:26;:59;;;5:2:-1;;;;30:1;27;20:12;1159:153:36;871:447;;;;;:::o;590:133::-;642:25;:33;;-1:-1:-1;;685:31:36;;;;;590:133::o;1329:208::-;1514:6;;;1471:59;;;;;;-1:-1:-1;;;;;1471:59:36;;;;;;;1514:6;;;1471:59;;;;;;;;;;;;:26;;;;;;:59;;;;;;;;;;1514:6;1471:26;:59;;;5:2:-1;;;;30:1;27;20:12;5:2;1471:59:36;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;1471:59:36;;;;1329:208;;;;:::o;146:40::-;;;-1:-1:-1;;;;;146:40:36;;:::o;450:134::-;531:4;503:32;;-1:-1:-1;;;;503:32:36;;;;;545;;;450:134::o;730:135::-;822:6;;;:36;;;;;;-1:-1:-1;;;;;822:36:36;;;;;;;;;;;;;;;;;;;;;;:6;;;;;:15;;:36;;;;;;;;;;;:6;;:36;;;5:2:-1;;;;30:1;27;20:12;5:2;822:36:36;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;822:36:36;;;;730:135;;;:::o;243:44::-;;;;;;;;;:::o;116:24::-;;;-1:-1:-1;;;;;116:24:36;;:::o",
+  "source": "pragma solidity 0.4.24;\n\nimport \"./MockEscrow.sol\";\nimport \"./MockAccountFactory.sol\";\n\ncontract MockReserve {\n\n    MockEscrow public escrow;\n    MockAccountFactory public accountFactory;\n\n    bool public shouldLockPullFromAccount = true;\n    bool public shouldLockPullFromEscrow = false;\n\n    constructor(MockEscrow _escrow, MockAccountFactory _accountFactory) public {\n        escrow = _escrow;\n        accountFactory = _accountFactory;\n    }\n\n    function allowLockPullFromAccount() public {\n        shouldLockPullFromAccount = true;\n        shouldLockPullFromEscrow = false;\n    }\n\n    function allowLockPullFromEscrow() public {\n        shouldLockPullFromAccount = false;\n        shouldLockPullFromEscrow = true;\n    }\n\n\n    function release(address _token, address _to, uint _value) \n        public\n    {   \n        escrow.transfer(_token, _to, _value);\n    }\n\n    function lock(address _token, address _from, uint _value, uint _profit, uint _loss)\n        public\n    {               \n        _profit;\n        _loss;\n\n        if(shouldLockPullFromAccount) {\n            escrow.transferFromAccount(_from, _token, address(escrow), _value);\n        } else if (shouldLockPullFromEscrow) {\n            MockEscrow(_from).transfer(_token, address(escrow), _value);\n        } else {\n            revert();\n        }\n    }\n\n    \n    function lockSurplus(address _from, address _forToken, address _token, uint _value) \n        public\n    {\n        _forToken;\n        \n        MockEscrow(_from).transfer(_token, address(escrow), _value);\n    }\n\n}",
+  "sourcePath": "/home/amxx/Work/subgraphs/nuo-audited-contracts/contracts/mock/MockReserve.sol",
+  "ast": {
+    "absolutePath": "/home/amxx/Work/subgraphs/nuo-audited-contracts/contracts/mock/MockReserve.sol",
+    "exportedSymbols": {
+      "MockReserve": [
+        11606
+      ]
+    },
+    "id": 11607,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 11460,
+        "literals": [
+          "solidity",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:36"
+      },
+      {
+        "absolutePath": "/home/amxx/Work/subgraphs/nuo-audited-contracts/contracts/mock/MockEscrow.sol",
+        "file": "./MockEscrow.sol",
+        "id": 11461,
+        "nodeType": "ImportDirective",
+        "scope": 11607,
+        "sourceUnit": 11213,
+        "src": "25:26:36",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/amxx/Work/subgraphs/nuo-audited-contracts/contracts/mock/MockAccountFactory.sol",
+        "file": "./MockAccountFactory.sol",
+        "id": 11462,
+        "nodeType": "ImportDirective",
+        "scope": 11607,
+        "sourceUnit": 11154,
+        "src": "52:34:36",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 11606,
+        "linearizedBaseContracts": [
+          11606
+        ],
+        "name": "MockReserve",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 11464,
+            "name": "escrow",
+            "nodeType": "VariableDeclaration",
+            "scope": 11606,
+            "src": "116:24:36",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_MockEscrow_$11212",
+              "typeString": "contract MockEscrow"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 11463,
+              "name": "MockEscrow",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 11212,
+              "src": "116:10:36",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_MockEscrow_$11212",
+                "typeString": "contract MockEscrow"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 11466,
+            "name": "accountFactory",
+            "nodeType": "VariableDeclaration",
+            "scope": 11606,
+            "src": "146:40:36",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_MockAccountFactory_$11153",
+              "typeString": "contract MockAccountFactory"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 11465,
+              "name": "MockAccountFactory",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 11153,
+              "src": "146:18:36",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_MockAccountFactory_$11153",
+                "typeString": "contract MockAccountFactory"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 11469,
+            "name": "shouldLockPullFromAccount",
+            "nodeType": "VariableDeclaration",
+            "scope": 11606,
+            "src": "193:44:36",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bool",
+              "typeString": "bool"
+            },
+            "typeName": {
+              "id": 11467,
+              "name": "bool",
+              "nodeType": "ElementaryTypeName",
+              "src": "193:4:36",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bool",
+                "typeString": "bool"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "74727565",
+              "id": 11468,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "bool",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "233:4:36",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_bool",
+                "typeString": "bool"
+              },
+              "value": "true"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 11472,
+            "name": "shouldLockPullFromEscrow",
+            "nodeType": "VariableDeclaration",
+            "scope": 11606,
+            "src": "243:44:36",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bool",
+              "typeString": "bool"
+            },
+            "typeName": {
+              "id": 11470,
+              "name": "bool",
+              "nodeType": "ElementaryTypeName",
+              "src": "243:4:36",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bool",
+                "typeString": "bool"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "66616c7365",
+              "id": 11471,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "bool",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "282:5:36",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_bool",
+                "typeString": "bool"
+              },
+              "value": "false"
+            },
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 11487,
+              "nodeType": "Block",
+              "src": "369:75:36",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 11481,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 11479,
+                      "name": "escrow",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 11464,
+                      "src": "379:6:36",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_MockEscrow_$11212",
+                        "typeString": "contract MockEscrow"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 11480,
+                      "name": "_escrow",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 11474,
+                      "src": "388:7:36",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_MockEscrow_$11212",
+                        "typeString": "contract MockEscrow"
+                      }
+                    },
+                    "src": "379:16:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_MockEscrow_$11212",
+                      "typeString": "contract MockEscrow"
+                    }
+                  },
+                  "id": 11482,
+                  "nodeType": "ExpressionStatement",
+                  "src": "379:16:36"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 11485,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 11483,
+                      "name": "accountFactory",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 11466,
+                      "src": "405:14:36",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_MockAccountFactory_$11153",
+                        "typeString": "contract MockAccountFactory"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 11484,
+                      "name": "_accountFactory",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 11476,
+                      "src": "422:15:36",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_MockAccountFactory_$11153",
+                        "typeString": "contract MockAccountFactory"
+                      }
+                    },
+                    "src": "405:32:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_MockAccountFactory_$11153",
+                      "typeString": "contract MockAccountFactory"
+                    }
+                  },
+                  "id": 11486,
+                  "nodeType": "ExpressionStatement",
+                  "src": "405:32:36"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 11488,
+            "implemented": true,
+            "isConstructor": true,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 11477,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 11474,
+                  "name": "_escrow",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11488,
+                  "src": "306:18:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_MockEscrow_$11212",
+                    "typeString": "contract MockEscrow"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 11473,
+                    "name": "MockEscrow",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 11212,
+                    "src": "306:10:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_MockEscrow_$11212",
+                      "typeString": "contract MockEscrow"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 11476,
+                  "name": "_accountFactory",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11488,
+                  "src": "326:34:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_MockAccountFactory_$11153",
+                    "typeString": "contract MockAccountFactory"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 11475,
+                    "name": "MockAccountFactory",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 11153,
+                    "src": "326:18:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_MockAccountFactory_$11153",
+                      "typeString": "contract MockAccountFactory"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "305:56:36"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 11478,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "369:0:36"
+            },
+            "scope": 11606,
+            "src": "294:150:36",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 11499,
+              "nodeType": "Block",
+              "src": "493:91:36",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 11493,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 11491,
+                      "name": "shouldLockPullFromAccount",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 11469,
+                      "src": "503:25:36",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "hexValue": "74727565",
+                      "id": 11492,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "bool",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "531:4:36",
+                      "subdenomination": null,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      },
+                      "value": "true"
+                    },
+                    "src": "503:32:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "id": 11494,
+                  "nodeType": "ExpressionStatement",
+                  "src": "503:32:36"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 11497,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 11495,
+                      "name": "shouldLockPullFromEscrow",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 11472,
+                      "src": "545:24:36",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "hexValue": "66616c7365",
+                      "id": 11496,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "bool",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "572:5:36",
+                      "subdenomination": null,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      },
+                      "value": "false"
+                    },
+                    "src": "545:32:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "id": 11498,
+                  "nodeType": "ExpressionStatement",
+                  "src": "545:32:36"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 11500,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "allowLockPullFromAccount",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 11489,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "483:2:36"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 11490,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "493:0:36"
+            },
+            "scope": 11606,
+            "src": "450:134:36",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 11511,
+              "nodeType": "Block",
+              "src": "632:91:36",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 11505,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 11503,
+                      "name": "shouldLockPullFromAccount",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 11469,
+                      "src": "642:25:36",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "hexValue": "66616c7365",
+                      "id": 11504,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "bool",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "670:5:36",
+                      "subdenomination": null,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      },
+                      "value": "false"
+                    },
+                    "src": "642:33:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "id": 11506,
+                  "nodeType": "ExpressionStatement",
+                  "src": "642:33:36"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 11509,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 11507,
+                      "name": "shouldLockPullFromEscrow",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 11472,
+                      "src": "685:24:36",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "hexValue": "74727565",
+                      "id": 11508,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "bool",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "712:4:36",
+                      "subdenomination": null,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      },
+                      "value": "true"
+                    },
+                    "src": "685:31:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "id": 11510,
+                  "nodeType": "ExpressionStatement",
+                  "src": "685:31:36"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 11512,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "allowLockPullFromEscrow",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 11501,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "622:2:36"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 11502,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "632:0:36"
+            },
+            "scope": 11606,
+            "src": "590:133:36",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 11529,
+              "nodeType": "Block",
+              "src": "809:56:36",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 11524,
+                        "name": "_token",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 11514,
+                        "src": "838:6:36",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 11525,
+                        "name": "_to",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 11516,
+                        "src": "846:3:36",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 11526,
+                        "name": "_value",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 11518,
+                        "src": "851:6:36",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 11521,
+                        "name": "escrow",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 11464,
+                        "src": "822:6:36",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_MockEscrow_$11212",
+                          "typeString": "contract MockEscrow"
+                        }
+                      },
+                      "id": 11523,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "transfer",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 11190,
+                      "src": "822:15:36",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_nonpayable$_t_address_$_t_address_$_t_uint256_$returns$__$",
+                        "typeString": "function (address,address,uint256) external"
+                      }
+                    },
+                    "id": 11527,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "822:36:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 11528,
+                  "nodeType": "ExpressionStatement",
+                  "src": "822:36:36"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 11530,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "release",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 11519,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 11514,
+                  "name": "_token",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11530,
+                  "src": "747:14:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 11513,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "747:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 11516,
+                  "name": "_to",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11530,
+                  "src": "763:11:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 11515,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "763:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 11518,
+                  "name": "_value",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11530,
+                  "src": "776:11:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 11517,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "776:4:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "746:42:36"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 11520,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "809:0:36"
+            },
+            "scope": 11606,
+            "src": "730:135:36",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 11579,
+              "nodeType": "Block",
+              "src": "974:344:36",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 11543,
+                    "name": "_profit",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 11538,
+                    "src": "999:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 11544,
+                  "nodeType": "ExpressionStatement",
+                  "src": "999:7:36"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 11545,
+                    "name": "_loss",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 11540,
+                    "src": "1016:5:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 11546,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1016:5:36"
+                },
+                {
+                  "condition": {
+                    "argumentTypes": null,
+                    "id": 11547,
+                    "name": "shouldLockPullFromAccount",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 11469,
+                    "src": "1035:25:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "falseBody": {
+                    "condition": {
+                      "argumentTypes": null,
+                      "id": 11560,
+                      "name": "shouldLockPullFromEscrow",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 11472,
+                      "src": "1163:24:36",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "falseBody": {
+                      "id": 11576,
+                      "nodeType": "Block",
+                      "src": "1279:33:36",
+                      "statements": [
+                        {
+                          "expression": {
+                            "argumentTypes": null,
+                            "arguments": [],
+                            "expression": {
+                              "argumentTypes": [],
+                              "id": 11573,
+                              "name": "revert",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [
+                                12219,
+                                12220
+                              ],
+                              "referencedDeclaration": 12219,
+                              "src": "1293:6:36",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_function_revert_pure$__$returns$__$",
+                                "typeString": "function () pure"
+                              }
+                            },
+                            "id": 11574,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "kind": "functionCall",
+                            "lValueRequested": false,
+                            "names": [],
+                            "nodeType": "FunctionCall",
+                            "src": "1293:8:36",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_tuple$__$",
+                              "typeString": "tuple()"
+                            }
+                          },
+                          "id": 11575,
+                          "nodeType": "ExpressionStatement",
+                          "src": "1293:8:36"
+                        }
+                      ]
+                    },
+                    "id": 11577,
+                    "nodeType": "IfStatement",
+                    "src": "1159:153:36",
+                    "trueBody": {
+                      "id": 11572,
+                      "nodeType": "Block",
+                      "src": "1189:84:36",
+                      "statements": [
+                        {
+                          "expression": {
+                            "argumentTypes": null,
+                            "arguments": [
+                              {
+                                "argumentTypes": null,
+                                "id": 11565,
+                                "name": "_token",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 11532,
+                                "src": "1230:6:36",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_address",
+                                  "typeString": "address"
+                                }
+                              },
+                              {
+                                "argumentTypes": null,
+                                "arguments": [
+                                  {
+                                    "argumentTypes": null,
+                                    "id": 11567,
+                                    "name": "escrow",
+                                    "nodeType": "Identifier",
+                                    "overloadedDeclarations": [],
+                                    "referencedDeclaration": 11464,
+                                    "src": "1246:6:36",
+                                    "typeDescriptions": {
+                                      "typeIdentifier": "t_contract$_MockEscrow_$11212",
+                                      "typeString": "contract MockEscrow"
+                                    }
+                                  }
+                                ],
+                                "expression": {
+                                  "argumentTypes": [
+                                    {
+                                      "typeIdentifier": "t_contract$_MockEscrow_$11212",
+                                      "typeString": "contract MockEscrow"
+                                    }
+                                  ],
+                                  "id": 11566,
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": true,
+                                  "lValueRequested": false,
+                                  "nodeType": "ElementaryTypeNameExpression",
+                                  "src": "1238:7:36",
+                                  "typeDescriptions": {
+                                    "typeIdentifier": "t_type$_t_address_$",
+                                    "typeString": "type(address)"
+                                  },
+                                  "typeName": "address"
+                                },
+                                "id": 11568,
+                                "isConstant": false,
+                                "isLValue": false,
+                                "isPure": false,
+                                "kind": "typeConversion",
+                                "lValueRequested": false,
+                                "names": [],
+                                "nodeType": "FunctionCall",
+                                "src": "1238:15:36",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_address",
+                                  "typeString": "address"
+                                }
+                              },
+                              {
+                                "argumentTypes": null,
+                                "id": 11569,
+                                "name": "_value",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 11536,
+                                "src": "1255:6:36",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_uint256",
+                                  "typeString": "uint256"
+                                }
+                              }
+                            ],
+                            "expression": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_address",
+                                  "typeString": "address"
+                                },
+                                {
+                                  "typeIdentifier": "t_address",
+                                  "typeString": "address"
+                                },
+                                {
+                                  "typeIdentifier": "t_uint256",
+                                  "typeString": "uint256"
+                                }
+                              ],
+                              "expression": {
+                                "argumentTypes": null,
+                                "arguments": [
+                                  {
+                                    "argumentTypes": null,
+                                    "id": 11562,
+                                    "name": "_from",
+                                    "nodeType": "Identifier",
+                                    "overloadedDeclarations": [],
+                                    "referencedDeclaration": 11534,
+                                    "src": "1214:5:36",
+                                    "typeDescriptions": {
+                                      "typeIdentifier": "t_address",
+                                      "typeString": "address"
+                                    }
+                                  }
+                                ],
+                                "expression": {
+                                  "argumentTypes": [
+                                    {
+                                      "typeIdentifier": "t_address",
+                                      "typeString": "address"
+                                    }
+                                  ],
+                                  "id": 11561,
+                                  "name": "MockEscrow",
+                                  "nodeType": "Identifier",
+                                  "overloadedDeclarations": [],
+                                  "referencedDeclaration": 11212,
+                                  "src": "1203:10:36",
+                                  "typeDescriptions": {
+                                    "typeIdentifier": "t_type$_t_contract$_MockEscrow_$11212_$",
+                                    "typeString": "type(contract MockEscrow)"
+                                  }
+                                },
+                                "id": 11563,
+                                "isConstant": false,
+                                "isLValue": false,
+                                "isPure": false,
+                                "kind": "typeConversion",
+                                "lValueRequested": false,
+                                "names": [],
+                                "nodeType": "FunctionCall",
+                                "src": "1203:17:36",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_contract$_MockEscrow_$11212",
+                                  "typeString": "contract MockEscrow"
+                                }
+                              },
+                              "id": 11564,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "memberName": "transfer",
+                              "nodeType": "MemberAccess",
+                              "referencedDeclaration": 11190,
+                              "src": "1203:26:36",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_function_external_nonpayable$_t_address_$_t_address_$_t_uint256_$returns$__$",
+                                "typeString": "function (address,address,uint256) external"
+                              }
+                            },
+                            "id": 11570,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "kind": "functionCall",
+                            "lValueRequested": false,
+                            "names": [],
+                            "nodeType": "FunctionCall",
+                            "src": "1203:59:36",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_tuple$__$",
+                              "typeString": "tuple()"
+                            }
+                          },
+                          "id": 11571,
+                          "nodeType": "ExpressionStatement",
+                          "src": "1203:59:36"
+                        }
+                      ]
+                    }
+                  },
+                  "id": 11578,
+                  "nodeType": "IfStatement",
+                  "src": "1032:280:36",
+                  "trueBody": {
+                    "id": 11559,
+                    "nodeType": "Block",
+                    "src": "1062:91:36",
+                    "statements": [
+                      {
+                        "expression": {
+                          "argumentTypes": null,
+                          "arguments": [
+                            {
+                              "argumentTypes": null,
+                              "id": 11551,
+                              "name": "_from",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 11534,
+                              "src": "1103:5:36",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_address",
+                                "typeString": "address"
+                              }
+                            },
+                            {
+                              "argumentTypes": null,
+                              "id": 11552,
+                              "name": "_token",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 11532,
+                              "src": "1110:6:36",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_address",
+                                "typeString": "address"
+                              }
+                            },
+                            {
+                              "argumentTypes": null,
+                              "arguments": [
+                                {
+                                  "argumentTypes": null,
+                                  "id": 11554,
+                                  "name": "escrow",
+                                  "nodeType": "Identifier",
+                                  "overloadedDeclarations": [],
+                                  "referencedDeclaration": 11464,
+                                  "src": "1126:6:36",
+                                  "typeDescriptions": {
+                                    "typeIdentifier": "t_contract$_MockEscrow_$11212",
+                                    "typeString": "contract MockEscrow"
+                                  }
+                                }
+                              ],
+                              "expression": {
+                                "argumentTypes": [
+                                  {
+                                    "typeIdentifier": "t_contract$_MockEscrow_$11212",
+                                    "typeString": "contract MockEscrow"
+                                  }
+                                ],
+                                "id": 11553,
+                                "isConstant": false,
+                                "isLValue": false,
+                                "isPure": true,
+                                "lValueRequested": false,
+                                "nodeType": "ElementaryTypeNameExpression",
+                                "src": "1118:7:36",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_type$_t_address_$",
+                                  "typeString": "type(address)"
+                                },
+                                "typeName": "address"
+                              },
+                              "id": 11555,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "kind": "typeConversion",
+                              "lValueRequested": false,
+                              "names": [],
+                              "nodeType": "FunctionCall",
+                              "src": "1118:15:36",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_address",
+                                "typeString": "address"
+                              }
+                            },
+                            {
+                              "argumentTypes": null,
+                              "id": 11556,
+                              "name": "_value",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 11536,
+                              "src": "1135:6:36",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_uint256",
+                                "typeString": "uint256"
+                              }
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": [
+                              {
+                                "typeIdentifier": "t_address",
+                                "typeString": "address"
+                              },
+                              {
+                                "typeIdentifier": "t_address",
+                                "typeString": "address"
+                              },
+                              {
+                                "typeIdentifier": "t_address",
+                                "typeString": "address"
+                              },
+                              {
+                                "typeIdentifier": "t_uint256",
+                                "typeString": "uint256"
+                              }
+                            ],
+                            "expression": {
+                              "argumentTypes": null,
+                              "id": 11548,
+                              "name": "escrow",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 11464,
+                              "src": "1076:6:36",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_contract$_MockEscrow_$11212",
+                                "typeString": "contract MockEscrow"
+                              }
+                            },
+                            "id": 11550,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "memberName": "transferFromAccount",
+                            "nodeType": "MemberAccess",
+                            "referencedDeclaration": 11211,
+                            "src": "1076:26:36",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_function_external_nonpayable$_t_address_$_t_address_$_t_address_$_t_uint256_$returns$__$",
+                              "typeString": "function (address,address,address,uint256) external"
+                            }
+                          },
+                          "id": 11557,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "kind": "functionCall",
+                          "lValueRequested": false,
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "1076:66:36",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_tuple$__$",
+                            "typeString": "tuple()"
+                          }
+                        },
+                        "id": 11558,
+                        "nodeType": "ExpressionStatement",
+                        "src": "1076:66:36"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 11580,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "lock",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 11541,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 11532,
+                  "name": "_token",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11580,
+                  "src": "885:14:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 11531,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "885:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 11534,
+                  "name": "_from",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11580,
+                  "src": "901:13:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 11533,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "901:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 11536,
+                  "name": "_value",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11580,
+                  "src": "916:11:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 11535,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "916:4:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 11538,
+                  "name": "_profit",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11580,
+                  "src": "929:12:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 11537,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "929:4:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 11540,
+                  "name": "_loss",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11580,
+                  "src": "943:10:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 11539,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "943:4:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "884:70:36"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 11542,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "974:0:36"
+            },
+            "scope": 11606,
+            "src": "871:447:36",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 11604,
+              "nodeType": "Block",
+              "src": "1433:104:36",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 11591,
+                    "name": "_forToken",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 11584,
+                    "src": "1443:9:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "id": 11592,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1443:9:36"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 11597,
+                        "name": "_token",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 11586,
+                        "src": "1498:6:36",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "id": 11599,
+                            "name": "escrow",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 11464,
+                            "src": "1514:6:36",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_MockEscrow_$11212",
+                              "typeString": "contract MockEscrow"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_contract$_MockEscrow_$11212",
+                              "typeString": "contract MockEscrow"
+                            }
+                          ],
+                          "id": 11598,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "lValueRequested": false,
+                          "nodeType": "ElementaryTypeNameExpression",
+                          "src": "1506:7:36",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_address_$",
+                            "typeString": "type(address)"
+                          },
+                          "typeName": "address"
+                        },
+                        "id": 11600,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "typeConversion",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "1506:15:36",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 11601,
+                        "name": "_value",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 11588,
+                        "src": "1523:6:36",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "id": 11594,
+                            "name": "_from",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 11582,
+                            "src": "1482:5:36",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          ],
+                          "id": 11593,
+                          "name": "MockEscrow",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 11212,
+                          "src": "1471:10:36",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_contract$_MockEscrow_$11212_$",
+                            "typeString": "type(contract MockEscrow)"
+                          }
+                        },
+                        "id": 11595,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "typeConversion",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "1471:17:36",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_MockEscrow_$11212",
+                          "typeString": "contract MockEscrow"
+                        }
+                      },
+                      "id": 11596,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "transfer",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 11190,
+                      "src": "1471:26:36",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_nonpayable$_t_address_$_t_address_$_t_uint256_$returns$__$",
+                        "typeString": "function (address,address,uint256) external"
+                      }
+                    },
+                    "id": 11602,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1471:59:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 11603,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1471:59:36"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 11605,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "lockSurplus",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 11589,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 11582,
+                  "name": "_from",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11605,
+                  "src": "1350:13:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 11581,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1350:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 11584,
+                  "name": "_forToken",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11605,
+                  "src": "1365:17:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 11583,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1365:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 11586,
+                  "name": "_token",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11605,
+                  "src": "1384:14:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 11585,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1384:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 11588,
+                  "name": "_value",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11605,
+                  "src": "1400:11:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 11587,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1400:4:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1349:63:36"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 11590,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1433:0:36"
+            },
+            "scope": 11606,
+            "src": "1329:208:36",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 11607,
+        "src": "88:1452:36"
+      }
+    ],
+    "src": "0:1540:36"
+  },
+  "legacyAST": {
+    "absolutePath": "/home/amxx/Work/subgraphs/nuo-audited-contracts/contracts/mock/MockReserve.sol",
+    "exportedSymbols": {
+      "MockReserve": [
+        11606
+      ]
+    },
+    "id": 11607,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 11460,
+        "literals": [
+          "solidity",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:36"
+      },
+      {
+        "absolutePath": "/home/amxx/Work/subgraphs/nuo-audited-contracts/contracts/mock/MockEscrow.sol",
+        "file": "./MockEscrow.sol",
+        "id": 11461,
+        "nodeType": "ImportDirective",
+        "scope": 11607,
+        "sourceUnit": 11213,
+        "src": "25:26:36",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/amxx/Work/subgraphs/nuo-audited-contracts/contracts/mock/MockAccountFactory.sol",
+        "file": "./MockAccountFactory.sol",
+        "id": 11462,
+        "nodeType": "ImportDirective",
+        "scope": 11607,
+        "sourceUnit": 11154,
+        "src": "52:34:36",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 11606,
+        "linearizedBaseContracts": [
+          11606
+        ],
+        "name": "MockReserve",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 11464,
+            "name": "escrow",
+            "nodeType": "VariableDeclaration",
+            "scope": 11606,
+            "src": "116:24:36",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_MockEscrow_$11212",
+              "typeString": "contract MockEscrow"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 11463,
+              "name": "MockEscrow",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 11212,
+              "src": "116:10:36",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_MockEscrow_$11212",
+                "typeString": "contract MockEscrow"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 11466,
+            "name": "accountFactory",
+            "nodeType": "VariableDeclaration",
+            "scope": 11606,
+            "src": "146:40:36",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_MockAccountFactory_$11153",
+              "typeString": "contract MockAccountFactory"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 11465,
+              "name": "MockAccountFactory",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 11153,
+              "src": "146:18:36",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_MockAccountFactory_$11153",
+                "typeString": "contract MockAccountFactory"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 11469,
+            "name": "shouldLockPullFromAccount",
+            "nodeType": "VariableDeclaration",
+            "scope": 11606,
+            "src": "193:44:36",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bool",
+              "typeString": "bool"
+            },
+            "typeName": {
+              "id": 11467,
+              "name": "bool",
+              "nodeType": "ElementaryTypeName",
+              "src": "193:4:36",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bool",
+                "typeString": "bool"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "74727565",
+              "id": 11468,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "bool",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "233:4:36",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_bool",
+                "typeString": "bool"
+              },
+              "value": "true"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 11472,
+            "name": "shouldLockPullFromEscrow",
+            "nodeType": "VariableDeclaration",
+            "scope": 11606,
+            "src": "243:44:36",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bool",
+              "typeString": "bool"
+            },
+            "typeName": {
+              "id": 11470,
+              "name": "bool",
+              "nodeType": "ElementaryTypeName",
+              "src": "243:4:36",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bool",
+                "typeString": "bool"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "66616c7365",
+              "id": 11471,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "bool",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "282:5:36",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_bool",
+                "typeString": "bool"
+              },
+              "value": "false"
+            },
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 11487,
+              "nodeType": "Block",
+              "src": "369:75:36",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 11481,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 11479,
+                      "name": "escrow",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 11464,
+                      "src": "379:6:36",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_MockEscrow_$11212",
+                        "typeString": "contract MockEscrow"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 11480,
+                      "name": "_escrow",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 11474,
+                      "src": "388:7:36",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_MockEscrow_$11212",
+                        "typeString": "contract MockEscrow"
+                      }
+                    },
+                    "src": "379:16:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_MockEscrow_$11212",
+                      "typeString": "contract MockEscrow"
+                    }
+                  },
+                  "id": 11482,
+                  "nodeType": "ExpressionStatement",
+                  "src": "379:16:36"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 11485,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 11483,
+                      "name": "accountFactory",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 11466,
+                      "src": "405:14:36",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_MockAccountFactory_$11153",
+                        "typeString": "contract MockAccountFactory"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 11484,
+                      "name": "_accountFactory",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 11476,
+                      "src": "422:15:36",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_MockAccountFactory_$11153",
+                        "typeString": "contract MockAccountFactory"
+                      }
+                    },
+                    "src": "405:32:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_MockAccountFactory_$11153",
+                      "typeString": "contract MockAccountFactory"
+                    }
+                  },
+                  "id": 11486,
+                  "nodeType": "ExpressionStatement",
+                  "src": "405:32:36"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 11488,
+            "implemented": true,
+            "isConstructor": true,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 11477,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 11474,
+                  "name": "_escrow",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11488,
+                  "src": "306:18:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_MockEscrow_$11212",
+                    "typeString": "contract MockEscrow"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 11473,
+                    "name": "MockEscrow",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 11212,
+                    "src": "306:10:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_MockEscrow_$11212",
+                      "typeString": "contract MockEscrow"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 11476,
+                  "name": "_accountFactory",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11488,
+                  "src": "326:34:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_MockAccountFactory_$11153",
+                    "typeString": "contract MockAccountFactory"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 11475,
+                    "name": "MockAccountFactory",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 11153,
+                    "src": "326:18:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_MockAccountFactory_$11153",
+                      "typeString": "contract MockAccountFactory"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "305:56:36"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 11478,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "369:0:36"
+            },
+            "scope": 11606,
+            "src": "294:150:36",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 11499,
+              "nodeType": "Block",
+              "src": "493:91:36",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 11493,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 11491,
+                      "name": "shouldLockPullFromAccount",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 11469,
+                      "src": "503:25:36",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "hexValue": "74727565",
+                      "id": 11492,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "bool",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "531:4:36",
+                      "subdenomination": null,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      },
+                      "value": "true"
+                    },
+                    "src": "503:32:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "id": 11494,
+                  "nodeType": "ExpressionStatement",
+                  "src": "503:32:36"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 11497,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 11495,
+                      "name": "shouldLockPullFromEscrow",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 11472,
+                      "src": "545:24:36",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "hexValue": "66616c7365",
+                      "id": 11496,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "bool",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "572:5:36",
+                      "subdenomination": null,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      },
+                      "value": "false"
+                    },
+                    "src": "545:32:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "id": 11498,
+                  "nodeType": "ExpressionStatement",
+                  "src": "545:32:36"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 11500,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "allowLockPullFromAccount",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 11489,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "483:2:36"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 11490,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "493:0:36"
+            },
+            "scope": 11606,
+            "src": "450:134:36",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 11511,
+              "nodeType": "Block",
+              "src": "632:91:36",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 11505,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 11503,
+                      "name": "shouldLockPullFromAccount",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 11469,
+                      "src": "642:25:36",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "hexValue": "66616c7365",
+                      "id": 11504,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "bool",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "670:5:36",
+                      "subdenomination": null,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      },
+                      "value": "false"
+                    },
+                    "src": "642:33:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "id": 11506,
+                  "nodeType": "ExpressionStatement",
+                  "src": "642:33:36"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 11509,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 11507,
+                      "name": "shouldLockPullFromEscrow",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 11472,
+                      "src": "685:24:36",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "hexValue": "74727565",
+                      "id": 11508,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "bool",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "712:4:36",
+                      "subdenomination": null,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      },
+                      "value": "true"
+                    },
+                    "src": "685:31:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "id": 11510,
+                  "nodeType": "ExpressionStatement",
+                  "src": "685:31:36"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 11512,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "allowLockPullFromEscrow",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 11501,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "622:2:36"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 11502,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "632:0:36"
+            },
+            "scope": 11606,
+            "src": "590:133:36",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 11529,
+              "nodeType": "Block",
+              "src": "809:56:36",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 11524,
+                        "name": "_token",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 11514,
+                        "src": "838:6:36",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 11525,
+                        "name": "_to",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 11516,
+                        "src": "846:3:36",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 11526,
+                        "name": "_value",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 11518,
+                        "src": "851:6:36",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 11521,
+                        "name": "escrow",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 11464,
+                        "src": "822:6:36",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_MockEscrow_$11212",
+                          "typeString": "contract MockEscrow"
+                        }
+                      },
+                      "id": 11523,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "transfer",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 11190,
+                      "src": "822:15:36",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_nonpayable$_t_address_$_t_address_$_t_uint256_$returns$__$",
+                        "typeString": "function (address,address,uint256) external"
+                      }
+                    },
+                    "id": 11527,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "822:36:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 11528,
+                  "nodeType": "ExpressionStatement",
+                  "src": "822:36:36"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 11530,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "release",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 11519,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 11514,
+                  "name": "_token",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11530,
+                  "src": "747:14:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 11513,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "747:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 11516,
+                  "name": "_to",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11530,
+                  "src": "763:11:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 11515,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "763:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 11518,
+                  "name": "_value",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11530,
+                  "src": "776:11:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 11517,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "776:4:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "746:42:36"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 11520,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "809:0:36"
+            },
+            "scope": 11606,
+            "src": "730:135:36",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 11579,
+              "nodeType": "Block",
+              "src": "974:344:36",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 11543,
+                    "name": "_profit",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 11538,
+                    "src": "999:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 11544,
+                  "nodeType": "ExpressionStatement",
+                  "src": "999:7:36"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 11545,
+                    "name": "_loss",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 11540,
+                    "src": "1016:5:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 11546,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1016:5:36"
+                },
+                {
+                  "condition": {
+                    "argumentTypes": null,
+                    "id": 11547,
+                    "name": "shouldLockPullFromAccount",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 11469,
+                    "src": "1035:25:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "falseBody": {
+                    "condition": {
+                      "argumentTypes": null,
+                      "id": 11560,
+                      "name": "shouldLockPullFromEscrow",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 11472,
+                      "src": "1163:24:36",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "falseBody": {
+                      "id": 11576,
+                      "nodeType": "Block",
+                      "src": "1279:33:36",
+                      "statements": [
+                        {
+                          "expression": {
+                            "argumentTypes": null,
+                            "arguments": [],
+                            "expression": {
+                              "argumentTypes": [],
+                              "id": 11573,
+                              "name": "revert",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [
+                                12219,
+                                12220
+                              ],
+                              "referencedDeclaration": 12219,
+                              "src": "1293:6:36",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_function_revert_pure$__$returns$__$",
+                                "typeString": "function () pure"
+                              }
+                            },
+                            "id": 11574,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "kind": "functionCall",
+                            "lValueRequested": false,
+                            "names": [],
+                            "nodeType": "FunctionCall",
+                            "src": "1293:8:36",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_tuple$__$",
+                              "typeString": "tuple()"
+                            }
+                          },
+                          "id": 11575,
+                          "nodeType": "ExpressionStatement",
+                          "src": "1293:8:36"
+                        }
+                      ]
+                    },
+                    "id": 11577,
+                    "nodeType": "IfStatement",
+                    "src": "1159:153:36",
+                    "trueBody": {
+                      "id": 11572,
+                      "nodeType": "Block",
+                      "src": "1189:84:36",
+                      "statements": [
+                        {
+                          "expression": {
+                            "argumentTypes": null,
+                            "arguments": [
+                              {
+                                "argumentTypes": null,
+                                "id": 11565,
+                                "name": "_token",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 11532,
+                                "src": "1230:6:36",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_address",
+                                  "typeString": "address"
+                                }
+                              },
+                              {
+                                "argumentTypes": null,
+                                "arguments": [
+                                  {
+                                    "argumentTypes": null,
+                                    "id": 11567,
+                                    "name": "escrow",
+                                    "nodeType": "Identifier",
+                                    "overloadedDeclarations": [],
+                                    "referencedDeclaration": 11464,
+                                    "src": "1246:6:36",
+                                    "typeDescriptions": {
+                                      "typeIdentifier": "t_contract$_MockEscrow_$11212",
+                                      "typeString": "contract MockEscrow"
+                                    }
+                                  }
+                                ],
+                                "expression": {
+                                  "argumentTypes": [
+                                    {
+                                      "typeIdentifier": "t_contract$_MockEscrow_$11212",
+                                      "typeString": "contract MockEscrow"
+                                    }
+                                  ],
+                                  "id": 11566,
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": true,
+                                  "lValueRequested": false,
+                                  "nodeType": "ElementaryTypeNameExpression",
+                                  "src": "1238:7:36",
+                                  "typeDescriptions": {
+                                    "typeIdentifier": "t_type$_t_address_$",
+                                    "typeString": "type(address)"
+                                  },
+                                  "typeName": "address"
+                                },
+                                "id": 11568,
+                                "isConstant": false,
+                                "isLValue": false,
+                                "isPure": false,
+                                "kind": "typeConversion",
+                                "lValueRequested": false,
+                                "names": [],
+                                "nodeType": "FunctionCall",
+                                "src": "1238:15:36",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_address",
+                                  "typeString": "address"
+                                }
+                              },
+                              {
+                                "argumentTypes": null,
+                                "id": 11569,
+                                "name": "_value",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 11536,
+                                "src": "1255:6:36",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_uint256",
+                                  "typeString": "uint256"
+                                }
+                              }
+                            ],
+                            "expression": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_address",
+                                  "typeString": "address"
+                                },
+                                {
+                                  "typeIdentifier": "t_address",
+                                  "typeString": "address"
+                                },
+                                {
+                                  "typeIdentifier": "t_uint256",
+                                  "typeString": "uint256"
+                                }
+                              ],
+                              "expression": {
+                                "argumentTypes": null,
+                                "arguments": [
+                                  {
+                                    "argumentTypes": null,
+                                    "id": 11562,
+                                    "name": "_from",
+                                    "nodeType": "Identifier",
+                                    "overloadedDeclarations": [],
+                                    "referencedDeclaration": 11534,
+                                    "src": "1214:5:36",
+                                    "typeDescriptions": {
+                                      "typeIdentifier": "t_address",
+                                      "typeString": "address"
+                                    }
+                                  }
+                                ],
+                                "expression": {
+                                  "argumentTypes": [
+                                    {
+                                      "typeIdentifier": "t_address",
+                                      "typeString": "address"
+                                    }
+                                  ],
+                                  "id": 11561,
+                                  "name": "MockEscrow",
+                                  "nodeType": "Identifier",
+                                  "overloadedDeclarations": [],
+                                  "referencedDeclaration": 11212,
+                                  "src": "1203:10:36",
+                                  "typeDescriptions": {
+                                    "typeIdentifier": "t_type$_t_contract$_MockEscrow_$11212_$",
+                                    "typeString": "type(contract MockEscrow)"
+                                  }
+                                },
+                                "id": 11563,
+                                "isConstant": false,
+                                "isLValue": false,
+                                "isPure": false,
+                                "kind": "typeConversion",
+                                "lValueRequested": false,
+                                "names": [],
+                                "nodeType": "FunctionCall",
+                                "src": "1203:17:36",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_contract$_MockEscrow_$11212",
+                                  "typeString": "contract MockEscrow"
+                                }
+                              },
+                              "id": 11564,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "memberName": "transfer",
+                              "nodeType": "MemberAccess",
+                              "referencedDeclaration": 11190,
+                              "src": "1203:26:36",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_function_external_nonpayable$_t_address_$_t_address_$_t_uint256_$returns$__$",
+                                "typeString": "function (address,address,uint256) external"
+                              }
+                            },
+                            "id": 11570,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "kind": "functionCall",
+                            "lValueRequested": false,
+                            "names": [],
+                            "nodeType": "FunctionCall",
+                            "src": "1203:59:36",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_tuple$__$",
+                              "typeString": "tuple()"
+                            }
+                          },
+                          "id": 11571,
+                          "nodeType": "ExpressionStatement",
+                          "src": "1203:59:36"
+                        }
+                      ]
+                    }
+                  },
+                  "id": 11578,
+                  "nodeType": "IfStatement",
+                  "src": "1032:280:36",
+                  "trueBody": {
+                    "id": 11559,
+                    "nodeType": "Block",
+                    "src": "1062:91:36",
+                    "statements": [
+                      {
+                        "expression": {
+                          "argumentTypes": null,
+                          "arguments": [
+                            {
+                              "argumentTypes": null,
+                              "id": 11551,
+                              "name": "_from",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 11534,
+                              "src": "1103:5:36",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_address",
+                                "typeString": "address"
+                              }
+                            },
+                            {
+                              "argumentTypes": null,
+                              "id": 11552,
+                              "name": "_token",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 11532,
+                              "src": "1110:6:36",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_address",
+                                "typeString": "address"
+                              }
+                            },
+                            {
+                              "argumentTypes": null,
+                              "arguments": [
+                                {
+                                  "argumentTypes": null,
+                                  "id": 11554,
+                                  "name": "escrow",
+                                  "nodeType": "Identifier",
+                                  "overloadedDeclarations": [],
+                                  "referencedDeclaration": 11464,
+                                  "src": "1126:6:36",
+                                  "typeDescriptions": {
+                                    "typeIdentifier": "t_contract$_MockEscrow_$11212",
+                                    "typeString": "contract MockEscrow"
+                                  }
+                                }
+                              ],
+                              "expression": {
+                                "argumentTypes": [
+                                  {
+                                    "typeIdentifier": "t_contract$_MockEscrow_$11212",
+                                    "typeString": "contract MockEscrow"
+                                  }
+                                ],
+                                "id": 11553,
+                                "isConstant": false,
+                                "isLValue": false,
+                                "isPure": true,
+                                "lValueRequested": false,
+                                "nodeType": "ElementaryTypeNameExpression",
+                                "src": "1118:7:36",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_type$_t_address_$",
+                                  "typeString": "type(address)"
+                                },
+                                "typeName": "address"
+                              },
+                              "id": 11555,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "kind": "typeConversion",
+                              "lValueRequested": false,
+                              "names": [],
+                              "nodeType": "FunctionCall",
+                              "src": "1118:15:36",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_address",
+                                "typeString": "address"
+                              }
+                            },
+                            {
+                              "argumentTypes": null,
+                              "id": 11556,
+                              "name": "_value",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 11536,
+                              "src": "1135:6:36",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_uint256",
+                                "typeString": "uint256"
+                              }
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": [
+                              {
+                                "typeIdentifier": "t_address",
+                                "typeString": "address"
+                              },
+                              {
+                                "typeIdentifier": "t_address",
+                                "typeString": "address"
+                              },
+                              {
+                                "typeIdentifier": "t_address",
+                                "typeString": "address"
+                              },
+                              {
+                                "typeIdentifier": "t_uint256",
+                                "typeString": "uint256"
+                              }
+                            ],
+                            "expression": {
+                              "argumentTypes": null,
+                              "id": 11548,
+                              "name": "escrow",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 11464,
+                              "src": "1076:6:36",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_contract$_MockEscrow_$11212",
+                                "typeString": "contract MockEscrow"
+                              }
+                            },
+                            "id": 11550,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "memberName": "transferFromAccount",
+                            "nodeType": "MemberAccess",
+                            "referencedDeclaration": 11211,
+                            "src": "1076:26:36",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_function_external_nonpayable$_t_address_$_t_address_$_t_address_$_t_uint256_$returns$__$",
+                              "typeString": "function (address,address,address,uint256) external"
+                            }
+                          },
+                          "id": 11557,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "kind": "functionCall",
+                          "lValueRequested": false,
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "1076:66:36",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_tuple$__$",
+                            "typeString": "tuple()"
+                          }
+                        },
+                        "id": 11558,
+                        "nodeType": "ExpressionStatement",
+                        "src": "1076:66:36"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 11580,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "lock",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 11541,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 11532,
+                  "name": "_token",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11580,
+                  "src": "885:14:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 11531,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "885:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 11534,
+                  "name": "_from",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11580,
+                  "src": "901:13:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 11533,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "901:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 11536,
+                  "name": "_value",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11580,
+                  "src": "916:11:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 11535,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "916:4:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 11538,
+                  "name": "_profit",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11580,
+                  "src": "929:12:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 11537,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "929:4:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 11540,
+                  "name": "_loss",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11580,
+                  "src": "943:10:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 11539,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "943:4:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "884:70:36"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 11542,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "974:0:36"
+            },
+            "scope": 11606,
+            "src": "871:447:36",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 11604,
+              "nodeType": "Block",
+              "src": "1433:104:36",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 11591,
+                    "name": "_forToken",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 11584,
+                    "src": "1443:9:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "id": 11592,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1443:9:36"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 11597,
+                        "name": "_token",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 11586,
+                        "src": "1498:6:36",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "id": 11599,
+                            "name": "escrow",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 11464,
+                            "src": "1514:6:36",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_MockEscrow_$11212",
+                              "typeString": "contract MockEscrow"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_contract$_MockEscrow_$11212",
+                              "typeString": "contract MockEscrow"
+                            }
+                          ],
+                          "id": 11598,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "lValueRequested": false,
+                          "nodeType": "ElementaryTypeNameExpression",
+                          "src": "1506:7:36",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_address_$",
+                            "typeString": "type(address)"
+                          },
+                          "typeName": "address"
+                        },
+                        "id": 11600,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "typeConversion",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "1506:15:36",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 11601,
+                        "name": "_value",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 11588,
+                        "src": "1523:6:36",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "id": 11594,
+                            "name": "_from",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 11582,
+                            "src": "1482:5:36",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          ],
+                          "id": 11593,
+                          "name": "MockEscrow",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 11212,
+                          "src": "1471:10:36",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_contract$_MockEscrow_$11212_$",
+                            "typeString": "type(contract MockEscrow)"
+                          }
+                        },
+                        "id": 11595,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "typeConversion",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "1471:17:36",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_MockEscrow_$11212",
+                          "typeString": "contract MockEscrow"
+                        }
+                      },
+                      "id": 11596,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "transfer",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 11190,
+                      "src": "1471:26:36",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_nonpayable$_t_address_$_t_address_$_t_uint256_$returns$__$",
+                        "typeString": "function (address,address,uint256) external"
+                      }
+                    },
+                    "id": 11602,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1471:59:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 11603,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1471:59:36"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 11605,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "lockSurplus",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 11589,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 11582,
+                  "name": "_from",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11605,
+                  "src": "1350:13:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 11581,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1350:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 11584,
+                  "name": "_forToken",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11605,
+                  "src": "1365:17:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 11583,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1365:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 11586,
+                  "name": "_token",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11605,
+                  "src": "1384:14:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 11585,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1384:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 11588,
+                  "name": "_value",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11605,
+                  "src": "1400:11:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 11587,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1400:4:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1349:63:36"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 11590,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1433:0:36"
+            },
+            "scope": 11606,
+            "src": "1329:208:36",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 11607,
+        "src": "88:1452:36"
+      }
+    ],
+    "src": "0:1540:36"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "2.0.1",
+  "updatedAt": "2019-09-23T18:55:29.371Z"
+}

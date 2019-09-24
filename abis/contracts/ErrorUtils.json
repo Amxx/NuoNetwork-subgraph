@@ -1,0 +1,681 @@
+{
+  "contractName": "ErrorUtils",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "methodSig",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "name": "errMsg",
+          "type": "string"
+        }
+      ],
+      "name": "LogError",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "bytes32Value",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "name": "methodSig",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "name": "errMsg",
+          "type": "string"
+        }
+      ],
+      "name": "LogErrorWithHintBytes32",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "addressValue",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "methodSig",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "name": "errMsg",
+          "type": "string"
+        }
+      ],
+      "name": "LogErrorWithHintAddress",
+      "type": "event"
+    }
+  ],
+  "bytecode": "0x6080604052348015600f57600080fd5b50603580601d6000396000f3006080604052600080fd00a165627a7a7230582000376b99c08ffe7bf95b4c9d24b86eb271b2f79d672cea85d62693f5c146b1d90029",
+  "deployedBytecode": "0x6080604052600080fd00a165627a7a7230582000376b99c08ffe7bf95b4c9d24b86eb271b2f79d672cea85d62693f5c146b1d90029",
+  "sourceMap": "76:274:4:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;76:274:4;;;;;;;",
+  "deployedSourceMap": "76:274:4:-;;;;;",
+  "source": "pragma solidity 0.4.24;\n\n/**\n * @author Rohit Soni (rohit@nuofox.com)\n */\n \ncontract ErrorUtils {\n\n    event LogError(string methodSig, string errMsg);\n    event LogErrorWithHintBytes32(bytes32 indexed bytes32Value, string methodSig, string errMsg);\n    event LogErrorWithHintAddress(address indexed addressValue, string methodSig, string errMsg);\n\n}",
+  "sourcePath": "/home/amxx/Work/subgraphs/nuo-audited-contracts/contracts/ErrorUtils.sol",
+  "ast": {
+    "absolutePath": "/home/amxx/Work/subgraphs/nuo-audited-contracts/contracts/ErrorUtils.sol",
+    "exportedSymbols": {
+      "ErrorUtils": [
+        1658
+      ]
+    },
+    "id": 1659,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1635,
+        "literals": [
+          "solidity",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:4"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": "@author Rohit Soni (rohit@nuofox.com)",
+        "fullyImplemented": true,
+        "id": 1658,
+        "linearizedBaseContracts": [
+          1658
+        ],
+        "name": "ErrorUtils",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 1641,
+            "name": "LogError",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1640,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1637,
+                  "indexed": false,
+                  "name": "methodSig",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1641,
+                  "src": "118:16:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1636,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "118:6:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1639,
+                  "indexed": false,
+                  "name": "errMsg",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1641,
+                  "src": "136:13:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1638,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "136:6:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "117:33:4"
+            },
+            "src": "103:48:4"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 1649,
+            "name": "LogErrorWithHintBytes32",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1648,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1643,
+                  "indexed": true,
+                  "name": "bytes32Value",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1649,
+                  "src": "186:28:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 1642,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "186:7:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1645,
+                  "indexed": false,
+                  "name": "methodSig",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1649,
+                  "src": "216:16:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1644,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "216:6:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1647,
+                  "indexed": false,
+                  "name": "errMsg",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1649,
+                  "src": "234:13:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1646,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "234:6:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "185:63:4"
+            },
+            "src": "156:93:4"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 1657,
+            "name": "LogErrorWithHintAddress",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1656,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1651,
+                  "indexed": true,
+                  "name": "addressValue",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1657,
+                  "src": "284:28:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1650,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "284:7:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1653,
+                  "indexed": false,
+                  "name": "methodSig",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1657,
+                  "src": "314:16:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1652,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "314:6:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1655,
+                  "indexed": false,
+                  "name": "errMsg",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1657,
+                  "src": "332:13:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1654,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "332:6:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "283:63:4"
+            },
+            "src": "254:93:4"
+          }
+        ],
+        "scope": 1659,
+        "src": "76:274:4"
+      }
+    ],
+    "src": "0:350:4"
+  },
+  "legacyAST": {
+    "absolutePath": "/home/amxx/Work/subgraphs/nuo-audited-contracts/contracts/ErrorUtils.sol",
+    "exportedSymbols": {
+      "ErrorUtils": [
+        1658
+      ]
+    },
+    "id": 1659,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1635,
+        "literals": [
+          "solidity",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:4"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": "@author Rohit Soni (rohit@nuofox.com)",
+        "fullyImplemented": true,
+        "id": 1658,
+        "linearizedBaseContracts": [
+          1658
+        ],
+        "name": "ErrorUtils",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 1641,
+            "name": "LogError",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1640,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1637,
+                  "indexed": false,
+                  "name": "methodSig",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1641,
+                  "src": "118:16:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1636,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "118:6:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1639,
+                  "indexed": false,
+                  "name": "errMsg",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1641,
+                  "src": "136:13:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1638,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "136:6:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "117:33:4"
+            },
+            "src": "103:48:4"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 1649,
+            "name": "LogErrorWithHintBytes32",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1648,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1643,
+                  "indexed": true,
+                  "name": "bytes32Value",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1649,
+                  "src": "186:28:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 1642,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "186:7:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1645,
+                  "indexed": false,
+                  "name": "methodSig",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1649,
+                  "src": "216:16:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1644,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "216:6:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1647,
+                  "indexed": false,
+                  "name": "errMsg",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1649,
+                  "src": "234:13:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1646,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "234:6:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "185:63:4"
+            },
+            "src": "156:93:4"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 1657,
+            "name": "LogErrorWithHintAddress",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1656,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1651,
+                  "indexed": true,
+                  "name": "addressValue",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1657,
+                  "src": "284:28:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1650,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "284:7:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1653,
+                  "indexed": false,
+                  "name": "methodSig",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1657,
+                  "src": "314:16:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1652,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "314:6:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1655,
+                  "indexed": false,
+                  "name": "errMsg",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1657,
+                  "src": "332:13:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1654,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "332:6:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "283:63:4"
+            },
+            "src": "254:93:4"
+          }
+        ],
+        "scope": 1659,
+        "src": "76:274:4"
+      }
+    ],
+    "src": "0:350:4"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "2.0.1",
+  "updatedAt": "2019-09-23T18:55:29.325Z"
+}
