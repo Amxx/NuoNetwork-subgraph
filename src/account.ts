@@ -40,10 +40,12 @@ export function handleLogImplChanged(event: LogImplChangedEvent): void
 
 export function handleLogTransferBySystem(event: LogTransferBySystemEvent): void
 {
+	let token = createToken(event.params.token)
+
 	let e = new AccountTransferBySystem(createEventID(event))
 	e.transaction = logTransaction(event).id
 	e.timestamp   = event.block.timestamp
-	e.token       = event.params.token.toHex()
+	e.token       = token.id
 	e.from        = event.address.toHex()
 	e.to          = event.params.to
 	e.value       = event.params.value
@@ -53,10 +55,12 @@ export function handleLogTransferBySystem(event: LogTransferBySystemEvent): void
 
 export function handleLogTransferByUser(event: LogTransferByUserEvent): void
 {
+	let token = createToken(event.params.token)
+
 	let e = new AccountTransferBySystem(createEventID(event))
 	e.transaction = logTransaction(event).id
 	e.timestamp   = event.block.timestamp
-	e.token       = event.params.token.toHex()
+	e.token       = token.id
 	e.from        = event.address.toHex()
 	e.to          = event.params.to
 	e.value       = event.params.value

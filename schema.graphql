@@ -9,8 +9,9 @@ type Transaction @entity {
 	blockNumber:                  BigInt!
 	accountTransferEvents:        [AccountTransferEvent!]! @derivedFrom(field: "transaction")
 	accountMaintenanceEvent:      [AccountMaintenanceEvent!]! @derivedFrom(field: "transaction")
-	reserveOrderEvent:            [LendOrderEvent!]! @derivedFrom(field: "transaction")
-	BorrowOrderEvent:             [BorrowOrderEvent!]! @derivedFrom(field: "transaction")
+	tokenReserveEvent:            [TokenReserve!]! @derivedFrom(field: "transaction")
+	lendOrderEvent:               [LendOrderEvent!]! @derivedFrom(field: "transaction")
+	borrowOrderEvent:             [BorrowOrderEvent!]! @derivedFrom(field: "transaction")
 	tradeEvent:                   [TradeEvent!]! @derivedFrom(field: "transaction")
 }
 
@@ -19,9 +20,9 @@ type Transaction @entity {
 # =============================================================================
 type Token @entity {
 	id:                           ID!
-	name:                         String!
-	symbol:                       String!
-	decimals:                     Int!
+	# name:                         String!
+	# symbol:                       String!
+	# decimals:                     Int!
 	transfers:                    [AccountTransferEvent!]! @derivedFrom(field: "token")
 	reserves:                     [TokenReserve!]! @derivedFrom(field: "token")
 	isLent:                       [LendOrder!]! @derivedFrom(field: "token")

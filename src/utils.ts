@@ -39,14 +39,19 @@ export function createAccountUserID(accountID: string, userID: string): string
 
 export function createToken(address: Address): Token
 {
-	let erc20 = ERC20Contract.bind(address)
 	let token = new Token(address.toHex())
-	let name       = erc20.try_name()
-	let symbol     = erc20.try_symbol()
-	let decimals   = erc20.try_decimals()
-	token.name     = name.reverted     ? address.toHex() : name.value
-	token.symbol   = symbol.reverted   ? address.toHex() : symbol.value
-	token.decimals = decimals.reverted ? 0               : decimals.value
-	token.save()
+	// let token = Token.load(address.toHex())
+	// if (token == null)
+	// {
+	// 	token = new Token(address.toHex())
+	// 	let erc20      = ERC20Contract.bind(address)
+	// 	let name       = erc20.try_name()
+	// 	let symbol     = erc20.try_symbol()
+	// 	let decimals   = erc20.try_decimals()
+	// 	token.name     = name.reverted     ? address.toHex() : name.value
+	// 	token.symbol   = symbol.reverted   ? address.toHex() : symbol.value
+	// 	token.decimals = decimals.reverted ? 0               : decimals.value
+	// 	token.save()
+	// }
 	return token;
 }
