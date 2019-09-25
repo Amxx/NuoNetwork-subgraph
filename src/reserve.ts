@@ -8,7 +8,9 @@ import {
 	LendOrderCreated,
 	LendOrderCancelled,
 	LendOrderCumulativeUpdate,
-	TokenReserve,
+	TokenReserveUpdate,
+	TokenReserveRelease,
+	TokenReserveLoss,
 } from '../generated/schema'
 
 import {
@@ -16,6 +18,8 @@ import {
 	LogOrderCancelled         as LogOrderCancelledEvent,
 	LogOrderCumulativeUpdated as LogOrderCumulativeUpdatedEvent,
 	LogReserveValuesUpdated   as LogReserveValuesUpdatedEvent,
+	LogRelease                as LogReleaseEvent,
+	LogLock                   as LogLockEvent,
 } from '../generated/Reserve/Reserve'
 
 import {
@@ -83,7 +87,7 @@ export function handleLogReserveValuesUpdated(event: LogReserveValuesUpdatedEven
 	let transaction = logTransaction(event)
 	let token      = fetchToken(event.params.token)
 
-	let e = new TokenReserve(createEventID(event))
+	let e = new TokenReserveUpdate(createEventID(event))
 	e.transaction = transaction.id
 	e.timestamp   = event.block.timestamp
 	e.token       = token.id
@@ -92,7 +96,7 @@ export function handleLogReserveValuesUpdated(event: LogReserveValuesUpdatedEven
 	e.loss        = decimalValue(event.params.loss, token.decimals)
 	e.save()
 
-	let el = new TokenReserve(event.params.token.toHex())
+	let el = new TokenReserveUpdate(event.params.token.toHex())
 	el.transaction = transaction.id
 	el.timestamp   = event.block.timestamp
 	el.token       = token.id
@@ -100,4 +104,33 @@ export function handleLogReserveValuesUpdated(event: LogReserveValuesUpdatedEven
 	el.profit      = decimalValue(event.params.profit, token.decimals)
 	el.loss        = decimalValue(event.params.loss, token.decimals)
 	el.save()
+}
+
+export function handleLogRelease(event: LogReleaseEvent): void
+{
+	let token = fetchToken(event.params.token)
+
+	let e = new TokenReserveRelease(createEventID(event))
+	e.transaction = logTransaction(event).id
+	e.timestamp   = event.block.timestamp
+	e.token       = token.id
+	e.to          = event.params.to.toHex()
+	e.value       = decimalValue(event.params.value, token.decimals)
+	e.by          = event.params.by
+	e.save()
+}
+
+export function handleLogLock(event: LogLockEvent): void
+{
+	let token = fetchToken(event.params.token)
+
+	let e = new TokenReserveLoss(createEventID(event))
+	e.transaction = logTransaction(event).id
+	e.timestamp   = event.block.timestamp
+	e.token       = token.id
+	e.value       = decimalValue(event.params.value, token.decimals)
+	e.profit      = decimalValue(event.params.profit, token.decimals)
+	e.loss        = decimalValue(event.params.loss, token.decimals)
+	e.by          = event.params.by
+	e.save()
 }

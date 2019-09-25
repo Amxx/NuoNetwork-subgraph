@@ -63,7 +63,9 @@ dataSources:
         - LendOrder
         - LendOrderCancelled
         - LendOrderCumulativeUpdate
-        - ReserveUpdate
+        - TokenReserveUpdate
+        - TokenReserveRelease
+        - TokenReserveLoss
       abis:
         - name: Reserve
           file: abis/contracts/Reserve.json
@@ -78,6 +80,10 @@ dataSources:
           handler: handleLogOrderCumulativeUpdated
         - event: LogReserveValuesUpdated(indexed address,indexed uint256,uint256,uint256,uint256)
           handler: handleLogReserveValuesUpdated
+        - event: LogRelease(indexed address,indexed address,uint256,address)
+          handler: handleLogRelease
+        - event: LogLock(indexed address,indexed address,uint256,uint256,uint256,address)
+          handler: handleLogLock
       file: ./src/reserve.ts
 
   - name: Kernel

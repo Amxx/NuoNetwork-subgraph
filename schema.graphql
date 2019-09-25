@@ -4,7 +4,7 @@ type Transaction @entity {
 	blockNumber:                  BigInt!
 	accountTransferEvents:        [AccountTransferEvent!]! @derivedFrom(field: "transaction")
 	accountMaintenanceEvent:      [AccountMaintenanceEvent!]! @derivedFrom(field: "transaction")
-	tokenReserveEvent:            [TokenReserve!]! @derivedFrom(field: "transaction")
+	tokenReserveEvent:            [TokenReserveEvent!]! @derivedFrom(field: "transaction")
 	lendOrderEvent:               [LendOrderEvent!]! @derivedFrom(field: "transaction")
 	borrowOrderEvent:             [BorrowOrderEvent!]! @derivedFrom(field: "transaction")
 	tradeEvent:                   [TradeEvent!]! @derivedFrom(field: "transaction")
@@ -19,7 +19,7 @@ type Token @entity {
 	# symbol:                       String!
 	decimals:                     Int!
 	transfers:                    [AccountTransferEvent!]! @derivedFrom(field: "token")
-	reserves:                     [TokenReserve!]! @derivedFrom(field: "token")
+	reservesEvents:               [TokenReserveEvent!]! @derivedFrom(field: "token")
 	isLent:                       [LendOrder!]! @derivedFrom(field: "token")
 	isBorrowed:                   [BorrowOrder!]! @derivedFrom(field: "principalToken")
 	isCollateral:                 [BorrowOrder!]! @derivedFrom(field: "collateralToken")
@@ -121,6 +121,47 @@ type AccountImplChanged implements AccountMaintenanceEvent @entity {
 }
 
 # =============================================================================
+# =                                  Reserve                                  =
+# =============================================================================
+interface TokenReserveEvent {
+	id:                           ID!
+	transaction:                  Transaction!
+	timestamp:                    BigInt!
+	token:                        Token!
+}
+
+type TokenReserveUpdate implements TokenReserveEvent @entity {
+	id:                           ID!
+	transaction:                  Transaction!
+	timestamp:                    BigInt!
+	token:                        Token!
+	reserve:                      BigDecimal!
+	profit:                       BigDecimal!
+	loss:                         BigDecimal!
+}
+
+type TokenReserveRelease implements TokenReserveEvent @entity {
+	id:                           ID!
+	transaction:                  Transaction!
+	timestamp:                    BigInt!
+	token:                        Token!
+	to:                           Account!
+	value:                        BigDecimal!
+	by:                           Bytes!
+}
+
+type TokenReserveLoss implements TokenReserveEvent @entity {
+	id:                           ID!
+	transaction:                  Transaction!
+	timestamp:                    BigInt!
+	token:                        Token!
+	value:                        BigDecimal!
+	profit:                       BigDecimal!
+	loss:                         BigDecimal!
+	by:                           Bytes!
+}
+
+# =============================================================================
 # =                             Reserve - Lending                             =
 # =============================================================================
 enum LendOrderStatus {
@@ -170,16 +211,6 @@ type LendOrderCumulativeUpdate implements LendOrderEvent @entity {
 	timestamp:                    BigInt!
 	order:                        LendOrder!
 	value:                        BigDecimal!
-}
-
-type TokenReserve @entity {
-	id:                           ID!
-	transaction:                  Transaction!
-	timestamp:                    BigInt!
-	token:                        Token!
-	reserve:                      BigDecimal!
-	profit:                       BigDecimal!
-	loss:                         BigDecimal!
 }
 
 # =============================================================================
