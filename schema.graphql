@@ -155,6 +155,7 @@ type TokenReserveLoss implements TokenReserveEvent @entity {
 	transaction:                  Transaction!
 	timestamp:                    BigInt!
 	token:                        Token!
+	from:                         Account!
 	value:                        BigDecimal!
 	profit:                       BigDecimal!
 	loss:                         BigDecimal!

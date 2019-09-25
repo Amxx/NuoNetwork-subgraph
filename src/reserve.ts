@@ -128,6 +128,7 @@ export function handleLogLock(event: LogLockEvent): void
 	e.transaction = logTransaction(event).id
 	e.timestamp   = event.block.timestamp
 	e.token       = token.id
+	e.from        = event.params.from.toHex()
 	e.value       = decimalValue(event.params.value, token.decimals)
 	e.profit      = decimalValue(event.params.profit, token.decimals)
 	e.loss        = decimalValue(event.params.loss, token.decimals)
