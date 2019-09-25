@@ -59,6 +59,7 @@ dataSources:
       apiVersion: 0.0.3
       language: wasm/assemblyscript
       entities:
+        - Token
         - LendOrder
         - LendOrderCancelled
         - LendOrderCumulativeUpdate
@@ -66,6 +67,8 @@ dataSources:
       abis:
         - name: Reserve
           file: abis/contracts/Reserve.json
+        - name: ERC20
+          file: abis/contracts/ERC20.json
       eventHandlers:
         - event: LogOrderCreated(indexed bytes32,indexed address,indexed address,address,uint256,uint256)
           handler: handleLogOrderCreated
@@ -88,12 +91,16 @@ dataSources:
       apiVersion: 0.0.3
       language: wasm/assemblyscript
       entities:
-        - KernelOrder
-        - KernelOrderRepaid
-        - KernelOrderDefaulted
+        - Token
+        - BorrowOrder
+        - BorrowOrderCreated
+        - BorrowOrderRepaid
+        - BorrowOrderDefaulted
       abis:
         - name: Kernel
           file: abis/contracts/Kernel.json
+        - name: ERC20
+          file: abis/contracts/ERC20.json
       eventHandlers:
         - event: LogOrderCreated(indexed bytes32,indexed address,indexed address,address,address,uint256,uint256,uint256,uint256,uint256)
           handler: handleLogOrderCreated
@@ -118,6 +125,8 @@ dataSources:
       abis:
         - name: KyberConnector
           file: abis/contracts/KyberConnector.json
+        - name: ERC20
+          file: abis/contracts/ERC20.json
       eventHandlers:
         - event: LogTrade(indexed address,indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
           handler: handleLogTradeKyber
@@ -138,6 +147,8 @@ dataSources:
       abis:
         - name: UniswapConnector
           file: abis/contracts/UniswapConnector.json
+        - name: ERC20
+          file: abis/contracts/ERC20.json
       eventHandlers:
         - event: LogTrade(indexed address,indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
           handler: handleLogTradeUniswap

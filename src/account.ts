@@ -24,7 +24,8 @@ import {
 	logTransaction,
 	createAccountUserID,
 	createEventID,
-	createToken,
+	fetchToken,
+	decimalValue,
 } from './utils'
 
 export function handleLogImplChanged(event: LogImplChangedEvent): void
@@ -40,7 +41,7 @@ export function handleLogImplChanged(event: LogImplChangedEvent): void
 
 export function handleLogTransferBySystem(event: LogTransferBySystemEvent): void
 {
-	let token = createToken(event.params.token)
+	let token = fetchToken(event.params.token)
 
 	let e = new AccountTransferBySystem(createEventID(event))
 	e.transaction = logTransaction(event).id
@@ -48,14 +49,14 @@ export function handleLogTransferBySystem(event: LogTransferBySystemEvent): void
 	e.token       = token.id
 	e.from        = event.address.toHex()
 	e.to          = event.params.to
-	e.value       = event.params.value
+	e.value       = decimalValue(event.params.value, token.decimals)
 	e.by          = event.params.by
 	e.save()
 }
 
 export function handleLogTransferByUser(event: LogTransferByUserEvent): void
 {
-	let token = createToken(event.params.token)
+	let token = fetchToken(event.params.token)
 
 	let e = new AccountTransferByUser(createEventID(event))
 	e.transaction = logTransaction(event).id
@@ -63,7 +64,7 @@ export function handleLogTransferByUser(event: LogTransferByUserEvent): void
 	e.token       = token.id
 	e.from        = event.address.toHex()
 	e.to          = event.params.to
-	e.value       = event.params.value
+	e.value       = decimalValue(event.params.value, token.decimals)
 	e.by          = event.params.by
 	e.save()
 }

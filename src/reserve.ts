@@ -1,6 +1,5 @@
 import {
-	BigInt,
-	log,
+	Address,
 } from '@graphprotocol/graph-ts'
 
 import {
@@ -22,18 +21,22 @@ import {
 import {
 	logTransaction,
 	createEventID,
+	fetchToken,
+	decimalValue,
 } from './utils'
 
 export function handleLogOrderCreated(event: LogOrderCreatedEvent): void
 {
+	let token = fetchToken(event.params.token)
+
 	let order = new LendOrder(event.params.orderHash.toHex())
 	order.status              = 'ACTIVE'
 	order.account             = event.params.account.toHex()
-	order.token               = event.params.token.toHex()
+	order.token               = token.id
 	order.byUser              = event.params.byUser.toHex()
-	order.createdValue        = event.params.value
+	order.createdValue        = decimalValue(event.params.value, token.decimals)
 	order.createdTimestamp    = event.block.timestamp
-	order.cumulativeValue     = event.params.value
+	order.cumulativeValue     = decimalValue(event.params.value, token.decimals)
 	order.cumulativeTimestamp = event.block.timestamp
 	order.expirationTimestamp = event.params.expirationTimestamp
 	order.save()
@@ -61,8 +64,9 @@ export function handleLogOrderCancelled(event: LogOrderCancelledEvent): void
 
 export function handleLogOrderCumulativeUpdated(event: LogOrderCumulativeUpdatedEvent): void
 {
-	let order = new LendOrder(event.params.orderHash.toHex())
-	order.cumulativeValue     = event.params.value
+	let order = LendOrder.load(event.params.orderHash.toHex())
+	let token = fetchToken(Address.fromString(order.token))
+	order.cumulativeValue     = decimalValue(event.params.value, token.decimals)
 	order.cumulativeTimestamp = event.params.updatedTill
 	order.save()
 
@@ -70,29 +74,30 @@ export function handleLogOrderCumulativeUpdated(event: LogOrderCumulativeUpdated
 	e.transaction = logTransaction(event).id
 	e.timestamp   = event.block.timestamp
 	e.order       = order.id
-	e.value       = event.params.value
+	e.value       = decimalValue(event.params.value, token.decimals)
 	e.save()
 }
 
 export function handleLogReserveValuesUpdated(event: LogReserveValuesUpdatedEvent): void
 {
 	let transaction = logTransaction(event)
+	let token      = fetchToken(event.params.token)
 
-	let e = new TokenReserve(event.params.token.toHex().concat('-').concat(createEventID(event)))
+	let e = new TokenReserve(createEventID(event))
 	e.transaction = transaction.id
 	e.timestamp   = event.block.timestamp
-	e.token       = event.params.token.toHex()
-	e.reserve     = event.params.reserve
-	e.profit      = event.params.profit
-	e.loss        = event.params.loss
+	e.token       = token.id
+	e.reserve     = decimalValue(event.params.reserve, token.decimals)
+	e.profit      = decimalValue(event.params.profit, token.decimals)
+	e.loss        = decimalValue(event.params.loss, token.decimals)
 	e.save()
 
-	let el = new TokenReserve(event.params.token.toHex().concat('-latest'))
+	let el = new TokenReserve(event.params.token.toHex())
 	el.transaction = transaction.id
 	el.timestamp   = event.block.timestamp
-	el.token       = event.params.token.toHex()
-	el.reserve     = event.params.reserve
-	el.profit      = event.params.profit
-	el.loss        = event.params.loss
+	el.token       = token.id
+	el.reserve     = decimalValue(event.params.reserve, token.decimals)
+	el.profit      = decimalValue(event.params.profit, token.decimals)
+	el.loss        = decimalValue(event.params.loss, token.decimals)
 	el.save()
 }

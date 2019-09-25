@@ -1,4 +1,10 @@
 import {
+	Address,
+	BigInt,
+	log,
+} from '@graphprotocol/graph-ts'
+
+import {
 	Token,
 	BorrowOrder,
 	BorrowOrderCreated,
@@ -15,20 +21,27 @@ import {
 import {
 	logTransaction,
 	createEventID,
+	fetchToken,
+	decimalValue,
 } from './utils'
 
 export function handleLogOrderCreated(event: LogOrderCreatedEvent): void
 {
+	let pToken = fetchToken(event.params.principalToken)
+	let cToken = fetchToken(event.params.collateralToken)
+	log.warning("handleLogOrderCreated - ptoken: {} decimal: {}", [ pToken.id, BigInt.fromI32(pToken.decimals).toString() ])
+	log.warning("handleLogOrderCreated - ctoken: {} decimal: {}", [ cToken.id, BigInt.fromI32(cToken.decimals).toString() ])
+
 	let order = new BorrowOrder(event.params.orderHash.toHex())
 	order.status              = 'ACTIVE'
 	order.account             = event.params.account.toHex()
 	order.byUser              = event.params.byUser.toHex()
-	order.principalToken      = event.params.principalToken.toHex()
-	order.principalAmount     = event.params.principalAmount
-	order.collateralToken     = event.params.collateralToken.toHex()
-	order.collateralAmount    = event.params.collateralAmount
-	order.premium             = event.params.premium
-	order.fee                 = event.params.fee
+	order.principalToken      = pToken.id
+	order.principalAmount     = decimalValue(event.params.principalAmount, pToken.decimals)
+	order.collateralToken     = cToken.id
+	order.collateralAmount    = decimalValue(event.params.collateralAmount, cToken.decimals)
+	order.premium             = decimalValue(event.params.premium, 18)
+	order.fee                 = decimalValue(event.params.fee, pToken.decimals)
 	order.createdTimestamp    = event.block.timestamp
 	order.expirationTimestamp = event.params.expirationTimestamp
 	order.save()
@@ -42,15 +55,19 @@ export function handleLogOrderCreated(event: LogOrderCreatedEvent): void
 
 export function handleLogOrderRepaid(event: LogOrderRepaidEvent): void
 {
-	let order = new BorrowOrder(event.params.orderHash.toHex())
+	let order = BorrowOrder.load(event.params.orderHash.toHex())
 	order.status = 'REPAID'
 	order.save()
+
+	let pToken = fetchToken(Address.fromString(order.principalToken))
+
+	log.warning("handleLogOrderRepaid - ptoken: {} decimal: {}", [ pToken.id, BigInt.fromI32(pToken.decimals).toString() ])
 
 	let e = new BorrowOrderRepaid(createEventID(event))
 	e.transaction = logTransaction(event).id
 	e.timestamp   = event.block.timestamp
 	e.order       = order.id
-	e.valueRepaid = event.params.valueRepaid
+	e.valueRepaid = decimalValue(event.params.valueRepaid, pToken.decimals)
 	e.save()
 }
 

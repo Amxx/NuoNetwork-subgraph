@@ -15,36 +15,44 @@ import {
 import {
 	logTransaction,
 	createEventID,
+	fetchToken,
+	decimalValue,
 } from './utils'
 
 export function handleLogTradeKyber(event: LogTradeEventKyber): void
 {
+	let sToken = fetchToken(event.params._srcToken)
+	let dToken = fetchToken(event.params._destToken)
+
 	let e = new KyberTrade(createEventID(event))
 	e.transaction       = logTransaction(event).id
 	e.timestamp         = event.block.timestamp
 	e.from              = event.params._from
-	e.srcToken          = event.params._srcToken.toHex()
-	e.destToken         = event.params._destToken.toHex()
-	e.srcTokenValue     = event.params._srcTokenValue
-	e.srcTokenValueLeft = event.params._srcTokenValueLeft
-	e.destTokenValue    = event.params._destTokenValue
-	e.destTokenValueMax = event.params._maxDestTokenValue
-	e.exchangeRate      = event.params._exchangeRate
+	e.srcToken          = sToken.id
+	e.destToken         = dToken.id
+	e.srcTokenValue     = decimalValue(event.params._srcTokenValue,     sToken.decimals)
+	e.srcTokenValueLeft = decimalValue(event.params._srcTokenValueLeft, sToken.decimals)
+	e.destTokenValue    = decimalValue(event.params._destTokenValue,    dToken.decimals)
+	e.destTokenValueMax = decimalValue(event.params._maxDestTokenValue, dToken.decimals)
+	e.exchangeRate      = decimalValue(event.params._exchangeRate,      18)
 	e.save()
 }
 
 export function handleLogTradeUniswap(event: LogTradeEventUniswap): void
 {
+	let sToken = fetchToken(event.params._srcToken)
+	let dToken = fetchToken(event.params._destToken)
+
 	let e = new UniswapTrade(createEventID(event))
 	e.transaction       = logTransaction(event).id
 	e.timestamp         = event.block.timestamp
 	e.from              = event.params._from
-	e.srcToken          = event.params._srcToken.toHex()
-	e.destToken         = event.params._destToken.toHex()
-	e.srcTokenValue     = event.params._srcTokenValue
-	e.srcTokenValueLeft = event.params._srcTokenValueLeft
-	e.destTokenValue    = event.params._destTokenValue
-	e.destTokenValueMax = event.params._maxDestTokenValue
-	e.exchangeRate      = event.params._exchangeRate
+	e.srcToken          = sToken.id
+	e.destToken         = dToken.id
+	e.srcTokenValue     = decimalValue(event.params._srcTokenValue,     sToken.decimals)
+	e.srcTokenValueLeft = decimalValue(event.params._srcTokenValueLeft, sToken.decimals)
+	e.destTokenValue    = decimalValue(event.params._destTokenValue,    dToken.decimals)
+	e.destTokenValueMax = decimalValue(event.params._maxDestTokenValue, dToken.decimals)
+	e.exchangeRate      = decimalValue(event.params._exchangeRate,      18)
 	e.save()
 }

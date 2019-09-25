@@ -1,6 +1,8 @@
 import {
 	Address,
 	Bytes,
+	BigInt,
+	BigDecimal,
 	EthereumEvent,
 } from '@graphprotocol/graph-ts'
 
@@ -16,11 +18,11 @@ import {
 export function logTransaction(event: EthereumEvent): Transaction
 {
 	let tx = new Transaction(event.transaction.hash.toHex())
-	tx.from        = event.transaction.from as Bytes
-	tx.to          = event.transaction.to as Bytes
-	tx.value       = event.transaction.value
-	tx.gasUsed     = event.transaction.gasUsed
-	tx.gasPrice    = event.transaction.gasPrice
+	// tx.from        = event.transaction.from as Bytes
+	// tx.to          = event.transaction.to as Bytes
+	// tx.value       = event.transaction.value
+	// tx.gasUsed     = event.transaction.gasUsed
+	// tx.gasPrice    = event.transaction.gasPrice
 	tx.timestamp   = event.block.timestamp
 	tx.blockNumber = event.block.number
 	tx.save();
@@ -37,22 +39,20 @@ export function createAccountUserID(accountID: string, userID: string): string
 	return accountID.concat('-').concat(userID)
 }
 
-export function createToken(address: Address): Token
+export function fetchToken(address: Address): Token
 {
-	let token = new Token(address.toHex())
-	token.save()
-	// let token = Token.load(address.toHex())
-	// if (token == null)
-	// {
-	// 	token = new Token(address.toHex())
-	// 	let erc20      = ERC20Contract.bind(address)
-	// 	let name       = erc20.try_name()
-	// 	let symbol     = erc20.try_symbol()
-	// 	let decimals   = erc20.try_decimals()
-	// 	token.name     = name.reverted     ? address.toHex() : name.value
-	// 	token.symbol   = symbol.reverted   ? address.toHex() : symbol.value
-	// 	token.decimals = decimals.reverted ? 0               : decimals.value
-	// 	token.save()
-	// }
-	return token;
+	let token = Token.load(address.toHex())
+	if (token == null)
+	{
+		token = new Token(address.toHex())
+		let erc20 = ERC20Contract.bind(address)
+		token.decimals = erc20.decimals().toI32()
+		token.save()
+	}
+	return token as Token;
+}
+
+export function decimalValue(value: BigInt, decimals: i32): BigDecimal
+{
+	return value.toBigDecimal().div(BigInt.fromI32(10).pow(decimals as u8).toBigDecimal())
 }

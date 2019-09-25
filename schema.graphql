@@ -1,10 +1,5 @@
 type Transaction @entity {
 	id:                           ID!
-	from:                         Bytes!
-	to:                           Bytes!
-	value:                        BigInt!
-	gasUsed:                      BigInt!
-	gasPrice:                     BigInt!
 	timestamp:                    BigInt!
 	blockNumber:                  BigInt!
 	accountTransferEvents:        [AccountTransferEvent!]! @derivedFrom(field: "transaction")
@@ -22,7 +17,7 @@ type Token @entity {
 	id:                           ID!
 	# name:                         String!
 	# symbol:                       String!
-	# decimals:                     Int!
+	decimals:                     Int!
 	transfers:                    [AccountTransferEvent!]! @derivedFrom(field: "token")
 	reserves:                     [TokenReserve!]! @derivedFrom(field: "token")
 	isLent:                       [LendOrder!]! @derivedFrom(field: "token")
@@ -62,7 +57,7 @@ interface AccountTransferEvent {
 	token:                        Token!
 	from:                         Account!
 	to:                           Bytes!
-	value:                        BigInt!
+	value:                        BigDecimal!
 	by:                           Bytes!
 }
 
@@ -73,7 +68,7 @@ type AccountTransferBySystem implements AccountTransferEvent @entity {
 	token:                        Token!
 	from:                         Account!
 	to:                           Bytes!
-	value:                        BigInt!
+	value:                        BigDecimal!
 	by:                           Bytes!
 }
 
@@ -84,7 +79,7 @@ type AccountTransferByUser implements AccountTransferEvent @entity {
 	token:                        Token!
 	from:                         Account!
 	to:                           Bytes!
-	value:                        BigInt!
+	value:                        BigDecimal!
 	by:                           Bytes!
 }
 
@@ -139,9 +134,9 @@ type LendOrder @entity {
 	account:                      Account!
 	byUser:                       User!
 	token:                        Token!
-	createdValue:                 BigInt!
+	createdValue:                 BigDecimal!
 	createdTimestamp:             BigInt!
-	cumulativeValue:              BigInt!
+	cumulativeValue:              BigDecimal!
 	cumulativeTimestamp:          BigInt!
 	expirationTimestamp:          BigInt!
 	updates:                      [LendOrderEvent!]! @derivedFrom(field: "order")
@@ -174,7 +169,7 @@ type LendOrderCumulativeUpdate implements LendOrderEvent @entity {
 	transaction:                  Transaction!
 	timestamp:                    BigInt!
 	order:                        LendOrder!
-	value:                        BigInt!
+	value:                        BigDecimal!
 }
 
 type TokenReserve @entity {
@@ -182,9 +177,9 @@ type TokenReserve @entity {
 	transaction:                  Transaction!
 	timestamp:                    BigInt!
 	token:                        Token!
-	reserve:                      BigInt!
-	profit:                       BigInt!
-	loss:                         BigInt!
+	reserve:                      BigDecimal!
+	profit:                       BigDecimal!
+	loss:                         BigDecimal!
 }
 
 # =============================================================================
@@ -206,11 +201,11 @@ type BorrowOrder @entity {
 	account:                      Account!
 	byUser:                       User!
 	principalToken:               Token!
-	principalAmount:              BigInt!
+	principalAmount:              BigDecimal!
 	collateralToken:              Token!
-	collateralAmount:             BigInt!
-	premium:                      BigInt!
-	fee:                          BigInt!
+	collateralAmount:             BigDecimal!
+	premium:                      BigDecimal!
+	fee:                          BigDecimal!
 	createdTimestamp:             BigInt!
 	expirationTimestamp:          BigInt!
 	updates:                      [BorrowOrderEvent!]! @derivedFrom(field: "order")
@@ -235,7 +230,7 @@ type BorrowOrderRepaid implements BorrowOrderEvent @entity {
 	transaction:                  Transaction!
 	timestamp:                    BigInt!
 	order:                        BorrowOrder!
-	valueRepaid:                  BigInt!
+	valueRepaid:                  BigDecimal!
 }
 
 type BorrowOrderDefaulted implements BorrowOrderEvent @entity {
@@ -256,11 +251,11 @@ interface TradeEvent {
 	from:                         Bytes!
 	srcToken:                     Token!
 	destToken:                    Token!
-	srcTokenValue:                BigInt!
-	srcTokenValueLeft:            BigInt!
-	destTokenValue:               BigInt!
-	destTokenValueMax:            BigInt!
-	exchangeRate:                 BigInt!
+	srcTokenValue:                BigDecimal!
+	srcTokenValueLeft:            BigDecimal!
+	destTokenValue:               BigDecimal!
+	destTokenValueMax:            BigDecimal!
+	exchangeRate:                 BigDecimal!
 }
 
 type UniswapTrade implements TradeEvent @entity {
@@ -270,11 +265,11 @@ type UniswapTrade implements TradeEvent @entity {
 	from:                         Bytes!
 	srcToken:                     Token!
 	destToken:                    Token!
-	srcTokenValue:                BigInt!
-	srcTokenValueLeft:            BigInt!
-	destTokenValue:               BigInt!
-	destTokenValueMax:            BigInt!
-	exchangeRate:                 BigInt!
+	srcTokenValue:                BigDecimal!
+	srcTokenValueLeft:            BigDecimal!
+	destTokenValue:               BigDecimal!
+	destTokenValueMax:            BigDecimal!
+	exchangeRate:                 BigDecimal!
 }
 
 type KyberTrade implements TradeEvent @entity {
@@ -284,9 +279,9 @@ type KyberTrade implements TradeEvent @entity {
 	from:                         Bytes!
 	srcToken:                     Token!
 	destToken:                    Token!
-	srcTokenValue:                BigInt!
-	srcTokenValueLeft:            BigInt!
-	destTokenValue:               BigInt!
-	destTokenValueMax:            BigInt!
-	exchangeRate:                 BigInt!
+	srcTokenValue:                BigDecimal!
+	srcTokenValueLeft:            BigDecimal!
+	destTokenValue:               BigDecimal!
+	destTokenValueMax:            BigDecimal!
+	exchangeRate:                 BigDecimal!
 }
