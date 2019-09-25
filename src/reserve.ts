@@ -78,7 +78,7 @@ export function handleLogReserveValuesUpdated(event: LogReserveValuesUpdatedEven
 {
 	let transaction = logTransaction(event)
 
-	let e = new TokenReserve(createEventID(event))
+	let e = new TokenReserve(event.params.token.toHex().concat('-').concat(createEventID(event)))
 	e.transaction = transaction.id
 	e.timestamp   = event.block.timestamp
 	e.token       = event.params.token.toHex()
@@ -86,4 +86,13 @@ export function handleLogReserveValuesUpdated(event: LogReserveValuesUpdatedEven
 	e.profit      = event.params.profit
 	e.loss        = event.params.loss
 	e.save()
+
+	let el = new TokenReserve(event.params.token.toHex().concat('-latest'))
+	el.transaction = transaction.id
+	el.timestamp   = event.block.timestamp
+	el.token       = event.params.token.toHex()
+	el.reserve     = event.params.reserve
+	el.profit      = event.params.profit
+	el.loss        = event.params.loss
+	el.save()
 }
