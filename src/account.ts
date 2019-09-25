@@ -57,7 +57,7 @@ export function handleLogTransferByUser(event: LogTransferByUserEvent): void
 {
 	let token = createToken(event.params.token)
 
-	let e = new AccountTransferBySystem(createEventID(event))
+	let e = new AccountTransferByUser(createEventID(event))
 	e.transaction = logTransaction(event).id
 	e.timestamp   = event.block.timestamp
 	e.token       = token.id

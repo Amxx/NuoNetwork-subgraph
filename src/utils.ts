@@ -40,6 +40,7 @@ export function createAccountUserID(accountID: string, userID: string): string
 export function createToken(address: Address): Token
 {
 	let token = new Token(address.toHex())
+	token.save()
 	// let token = Token.load(address.toHex())
 	// if (token == null)
 	// {
