@@ -45,9 +45,9 @@ export function fetchToken(address: Address): Token
 	if (token == null)
 	{
 		token = new Token(address.toHex())
-		let erc20 = ERC20Contract.bind(address)
-		// token.name     = erc20.name()
-		// token.symbol   = erc20.symbol()
+		let erc20      = ERC20Contract.bind(address)
+		token.name     = token.id // TODO: erc20.name() fails for some tokens
+		token.symbol   = token.id // TODO: erc20.symbol() fails for some tokens
 		token.decimals = erc20.decimals().toI32()
 		token.save()
 	}

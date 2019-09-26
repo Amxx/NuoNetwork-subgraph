@@ -65,7 +65,7 @@ export function handleLogTransferByUser(event: LogTransferByUserEvent): void
 	e.from        = event.address.toHex()
 	e.to          = event.params.to
 	e.value       = decimalValue(event.params.value, token.decimals)
-	e.by          = event.params.by
+	e.by          = event.params.by.toHex()
 	e.save()
 }
 
@@ -84,7 +84,7 @@ export function handleLogUserAdded(event: LogUserAddedEvent): void
 	e.timestamp   = event.block.timestamp
 	e.account     = event.address.toHex()
 	e.user        = user.id
-	e.by          = event.params.by
+	e.by          = event.params.by.toHex()
 	e.save()
 }
 
@@ -100,6 +100,6 @@ export function handleLogUserRemoved(event: LogUserRemovedEvent): void
 	e.timestamp   = event.block.timestamp
 	e.account     = event.address.toHex()
 	e.user        = user.id
-	e.by          = event.params.by
+	e.by          = event.params.by.toHex()
 	e.save()
 }

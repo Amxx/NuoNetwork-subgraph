@@ -15,8 +15,8 @@ type Transaction @entity {
 # =============================================================================
 type Token @entity {
 	id:                           ID!
-	# name:                         String!
-	# symbol:                       String!
+	name:                         String!
+	symbol:                       String!
 	decimals:                     Int!
 	transfers:                    [AccountTransferEvent!]! @derivedFrom(field: "token")
 	reservesEvents:               [TokenReserveEvent!]! @derivedFrom(field: "token")
@@ -58,7 +58,6 @@ interface AccountTransferEvent {
 	from:                         Account!
 	to:                           Bytes!
 	value:                        BigDecimal!
-	by:                           Bytes!
 }
 
 type AccountTransferBySystem implements AccountTransferEvent @entity {
@@ -80,7 +79,7 @@ type AccountTransferByUser implements AccountTransferEvent @entity {
 	from:                         Account!
 	to:                           Bytes!
 	value:                        BigDecimal!
-	by:                           Bytes!
+	by:                           User!
 }
 
 # =============================================================================
@@ -99,7 +98,7 @@ type AccountUserAdded implements AccountMaintenanceEvent @entity {
 	timestamp:                    BigInt!
 	account:                      Account!
 	user:                         User!
-	by:                           Bytes!
+	by:                           User!
 }
 
 type AccountUserRemoved implements AccountMaintenanceEvent @entity {
@@ -108,7 +107,7 @@ type AccountUserRemoved implements AccountMaintenanceEvent @entity {
 	timestamp:                    BigInt!
 	account:                      Account!
 	user:                         User!
-	by:                           Bytes!
+	by:                           User!
 }
 
 type AccountImplChanged implements AccountMaintenanceEvent @entity {
