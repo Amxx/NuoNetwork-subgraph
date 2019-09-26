@@ -1,7 +1,5 @@
 import {
 	Address,
-	BigInt,
-	log,
 } from '@graphprotocol/graph-ts'
 
 import {
@@ -29,8 +27,6 @@ export function handleLogOrderCreated(event: LogOrderCreatedEvent): void
 {
 	let pToken = fetchToken(event.params.principalToken)
 	let cToken = fetchToken(event.params.collateralToken)
-	log.warning("handleLogOrderCreated - ptoken: {} decimal: {}", [ pToken.id, BigInt.fromI32(pToken.decimals).toString() ])
-	log.warning("handleLogOrderCreated - ctoken: {} decimal: {}", [ cToken.id, BigInt.fromI32(cToken.decimals).toString() ])
 
 	let order = new BorrowOrder(event.params.orderHash.toHex())
 	order.status              = 'ACTIVE'
@@ -60,8 +56,6 @@ export function handleLogOrderRepaid(event: LogOrderRepaidEvent): void
 	order.save()
 
 	let pToken = fetchToken(Address.fromString(order.principalToken))
-
-	log.warning("handleLogOrderRepaid - ptoken: {} decimal: {}", [ pToken.id, BigInt.fromI32(pToken.decimals).toString() ])
 
 	let e = new BorrowOrderRepaid(createEventID(event))
 	e.transaction = logTransaction(event).id
