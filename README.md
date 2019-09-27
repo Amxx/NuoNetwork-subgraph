@@ -13,7 +13,9 @@ Make sure to check out the different branches:
 * **Token**
 * **Account**
 * **TokenReserveUpdate:** Reserve for a token (full history). Sort desc by updatedTill to view the latest update
-* **LendOrder & BorrowOrder:** Account's positions, with details and history.
+* **LendOrder:** Lending positions, with details and history.
+* **BorrowOrder:** Borrowing positions, with details and history.
+* **MarginOrder:** Margin trading positions, with details and history.
 * **UniswapTrade & KyberTrade:** Trading report for automatic token swaps
 
 ## Contact me
