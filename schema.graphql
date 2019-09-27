@@ -7,6 +7,7 @@ type Transaction @entity {
 	tokenReserveEvent:            [TokenReserveEvent!]! @derivedFrom(field: "transaction")
 	lendOrderEvent:               [LendOrderEvent!]! @derivedFrom(field: "transaction")
 	borrowOrderEvent:             [BorrowOrderEvent!]! @derivedFrom(field: "transaction")
+	marginOrderEvent:             [MarginOrderEvent!]! @derivedFrom(field: "transaction")
 	tradeEvent:                   [TradeEvent!]! @derivedFrom(field: "transaction")
 }
 
@@ -21,8 +22,12 @@ type Token @entity {
 	transfers:                    [AccountTransferEvent!]! @derivedFrom(field: "token")
 	reservesEvents:               [TokenReserveEvent!]! @derivedFrom(field: "token")
 	isLent:                       [LendOrder!]! @derivedFrom(field: "token")
-	isBorrowed:                   [BorrowOrder!]! @derivedFrom(field: "principalToken")
-	isCollateral:                 [BorrowOrder!]! @derivedFrom(field: "collateralToken")
+	isBorrowPrincipal:            [BorrowOrder!]! @derivedFrom(field: "principalToken")
+	isBorrowCollateral:           [BorrowOrder!]! @derivedFrom(field: "collateralToken")
+	isMarginPrincipal:            [BorrowOrder!]! @derivedFrom(field: "principalToken")
+	isMarginCollateral:           [MarginOrderEvent!]! @derivedFrom(field: "collateralToken")
+	isMarginTrade:                [MarginOrderEvent!]! @derivedFrom(field: "tradeToken")
+	isMarginClosing:              [MarginOrderEvent!]! @derivedFrom(field: "closingToken")
 	asTradeFrom:                  [TradeEvent!]! @derivedFrom(field: "srcToken")
 	asTradeTo:                    [TradeEvent!]! @derivedFrom(field: "destToken")
 }
@@ -32,6 +37,7 @@ type Account @entity {
 	users:                        [AccountUser!]! @derivedFrom(field: "account")
 	lending:                      [LendOrder!]! @derivedFrom(field: "account")
 	borrowing:                    [BorrowOrder!]! @derivedFrom(field: "account")
+	margin:                       [MarginOrder!]! @derivedFrom(field: "account")
 	transfers:                    [AccountTransferEvent!]! @derivedFrom(field: "account")
 	maintenance:                  [AccountMaintenanceEvent!]! @derivedFrom(field: "account")
 }
@@ -137,6 +143,7 @@ type TokenReserveUpdate implements TokenReserveEvent @entity {
 	reserve:                      BigDecimal!
 	profit:                       BigDecimal!
 	loss:                         BigDecimal!
+	updatedTill:                  BigInt!
 }
 
 type TokenReserveRelease implements TokenReserveEvent @entity {
@@ -221,6 +228,7 @@ enum BorrowOrderStatus {
 	REPAID
 	DEFAULTED
 }
+
 enum BorrowOrderDefaultedReason{
 	DUE_DATE_PASSED
 	COLLATERAL_UNSAFE
@@ -270,6 +278,100 @@ type BorrowOrderDefaulted implements BorrowOrderEvent @entity {
 	timestamp:                    BigInt!
 	order:                        BorrowOrder!
 	reason:                       BorrowOrderDefaultedReason!
+}
+
+# =============================================================================
+# =                         MKernel - Margin Trading                          =
+# =============================================================================
+enum MarginOrderStatus
+{
+	ACTIVE
+	LIQUIDATED
+	STOPPED
+	DEFAULTED
+}
+
+enum MarginOrderDefaultedReason
+{
+	MKERNEL_DUE_DATE_PASSED
+	MKERNEL_ORDER_UNSAFE
+}
+
+type MarginOrder @entity {
+	id:                           ID!
+	status:                       MarginOrderStatus!
+	account:                      Account!
+	byUser:                       User!
+	principalToken:               Token!
+	principalAmount:              BigDecimal!
+	collateralToken:              Token!
+	collateralAmount:             BigDecimal!
+	tradeToken:                   Token!      # TRADE
+	closingToken:                 Token!      # TRADE
+	exchangeConnector:            Bytes!      # TRADE
+	stopProfit:                   BigDecimal! # TRADE
+	stopLoss:                     BigDecimal! # TRADE
+	premium:                      BigDecimal!
+	fee:                          BigDecimal!
+	createdTimestamp:             BigInt!
+	expirationTimestamp:          BigInt!
+	salt:                         BigInt!
+	updates:                      [MarginOrderEvent!]! @derivedFrom(field: "order")
+}
+
+interface MarginOrderEvent
+{
+	id:                           ID!
+	transaction:                  Transaction!
+	timestamp:                    BigInt!
+	order:                        MarginOrder!
+}
+
+type MarginOrderCreated implements MarginOrderEvent @entity
+{
+	id:                           ID!
+	transaction:                  Transaction!
+	timestamp:                    BigInt!
+	order:                        MarginOrder!
+}
+
+type MarginOrderLiquidatedByUser implements MarginOrderEvent @entity
+{
+	id:                           ID!
+	transaction:                  Transaction!
+	timestamp:                    BigInt!
+	order:                        MarginOrder!
+}
+
+type MarginOrderStoppedAtProfit implements MarginOrderEvent @entity
+{
+	id:                           ID!
+	transaction:                  Transaction!
+	timestamp:                    BigInt!
+	order:                        MarginOrder!
+}
+
+type MarginOrderDefaulted implements MarginOrderEvent @entity
+{
+	id:                           ID!
+	transaction:                  Transaction!
+	timestamp:                    BigInt!
+	order:                        MarginOrder!
+	reason:                       MarginOrderDefaultedReason!
+}
+
+type MarginSettlement implements MarginOrderEvent @entity
+{
+	id:                           ID!
+	transaction:                  Transaction!
+	timestamp:                    BigInt!
+	order:                        MarginOrder!
+	valueRepaid:                  BigDecimal!
+	reserveProfit:                BigDecimal!
+	reserveLoss:                  BigDecimal!
+	collateralLeft:               BigDecimal!
+	userProfit:                   BigDecimal!
+	fee:                          BigDecimal!
 }
 
 # =============================================================================

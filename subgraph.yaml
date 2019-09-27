@@ -116,6 +116,42 @@ dataSources:
           handler: handleLogOrderDefaulted
       file: ./src/kernel.ts
 
+  - name: MKernel
+    kind: ethereum/contract
+    network: mainnet
+    source:
+      address: '0x740f8b58f5562c8379f2a8c2230c9be5c03ac3fc'
+      abi: MKernel
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.3
+      language: wasm/assemblyscript
+      entities:
+        - Token
+        - MarginOrder
+        - MarginOrderCreated
+        - MarginOrderLiquidatedByUser
+        - MarginOrderStoppedAtProfit
+        - MarginOrderDefaulted
+        - MarginSettlement
+      abis:
+        - name: MKernel
+          file: abis/contracts/MKernel.json
+        - name: ERC20
+          file: abis/contracts/ERC20.json
+      eventHandlers:
+        - event: LogOrderCreated(indexed bytes32,uint256,uint256)
+          handler: handleLogOrderCreated
+        - event: LogOrderLiquidatedByUser(indexed bytes32)
+          handler: handleLogOrderLiquidatedByUser
+        - event: LogOrderStoppedAtProfit(indexed bytes32)
+          handler: handleLogOrderStoppedAtProfit
+        - event: LogOrderDefaulted(indexed bytes32,string)
+          handler: handleLogOrderDefaulted
+        - event: LogOrderSettlement(indexed bytes32,uint256,uint256,uint256,uint256,uint256,uint256)
+          handler: handleLogOrderSettlement
+      file: ./src/mkernel.ts
+
   - name: KyberConnector
     kind: ethereum/contract
     network: mainnet

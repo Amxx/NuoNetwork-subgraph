@@ -84,26 +84,17 @@ export function handleLogOrderCumulativeUpdated(event: LogOrderCumulativeUpdated
 
 export function handleLogReserveValuesUpdated(event: LogReserveValuesUpdatedEvent): void
 {
-	let transaction = logTransaction(event)
-	let token      = fetchToken(event.params.token)
+	let token = fetchToken(event.params.token)
 
 	let e = new TokenReserveUpdate(token.symbol.concat('-').concat(createEventID(event)))
-	e.transaction = transaction.id
+	e.transaction = logTransaction(event).id
 	e.timestamp   = event.block.timestamp
 	e.token       = token.id
 	e.reserve     = decimalValue(event.params.reserve, token.decimals)
 	e.profit      = decimalValue(event.params.profit, token.decimals)
 	e.loss        = decimalValue(event.params.loss, token.decimals)
+	e.updatedTill = event.params.updatedTill
 	e.save()
-
-	let latest = new TokenReserveUpdate(token.symbol.concat('-latest'))
-	latest.transaction = e.transaction
-	latest.timestamp   = e.timestamp
-	latest.token       = e.token
-	latest.reserve     = e.reserve
-	latest.profit      = e.profit
-	latest.loss        = e.loss
-	latest.save()
 }
 
 export function handleLogRelease(event: LogReleaseEvent): void
