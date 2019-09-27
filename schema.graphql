@@ -24,7 +24,7 @@ type Token @entity {
 	isLent:                       [LendOrder!]! @derivedFrom(field: "token")
 	isBorrowPrincipal:            [BorrowOrder!]! @derivedFrom(field: "principalToken")
 	isBorrowCollateral:           [BorrowOrder!]! @derivedFrom(field: "collateralToken")
-	isMarginPrincipal:            [BorrowOrder!]! @derivedFrom(field: "principalToken")
+	isMarginPrincipal:            [MarginOrderEvent!]! @derivedFrom(field: "principalToken")
 	isMarginCollateral:           [MarginOrderEvent!]! @derivedFrom(field: "collateralToken")
 	isMarginTrade:                [MarginOrderEvent!]! @derivedFrom(field: "tradeToken")
 	isMarginClosing:              [MarginOrderEvent!]! @derivedFrom(field: "closingToken")
