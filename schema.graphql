@@ -24,10 +24,10 @@ type Token @entity {
 	isLent:                       [LendOrder!]! @derivedFrom(field: "token")
 	isBorrowPrincipal:            [BorrowOrder!]! @derivedFrom(field: "principalToken")
 	isBorrowCollateral:           [BorrowOrder!]! @derivedFrom(field: "collateralToken")
-	isMarginPrincipal:            [MarginOrderEvent!]! @derivedFrom(field: "principalToken")
-	isMarginCollateral:           [MarginOrderEvent!]! @derivedFrom(field: "collateralToken")
-	isMarginTrade:                [MarginOrderEvent!]! @derivedFrom(field: "tradeToken")
-	isMarginClosing:              [MarginOrderEvent!]! @derivedFrom(field: "closingToken")
+	isMarginPrincipal:            [MarginOrder!]! @derivedFrom(field: "principalToken")
+	isMarginCollateral:           [MarginOrder!]! @derivedFrom(field: "collateralToken")
+	isMarginTrade:                [MarginOrder!]! @derivedFrom(field: "tradeToken")
+	isMarginClosing:              [MarginOrder!]! @derivedFrom(field: "closingToken")
 	asTradeFrom:                  [TradeEvent!]! @derivedFrom(field: "srcToken")
 	asTradeTo:                    [TradeEvent!]! @derivedFrom(field: "destToken")
 }
@@ -38,7 +38,7 @@ type Account @entity {
 	lending:                      [LendOrder!]! @derivedFrom(field: "account")
 	borrowing:                    [BorrowOrder!]! @derivedFrom(field: "account")
 	margin:                       [MarginOrder!]! @derivedFrom(field: "account")
-	transfers:                    [AccountTransferEvent!]! @derivedFrom(field: "account")
+	transfers:                    [AccountTransferEvent!]! @derivedFrom(field: "from")
 	maintenance:                  [AccountMaintenanceEvent!]! @derivedFrom(field: "account")
 }
 

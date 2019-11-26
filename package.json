@@ -1,19 +1,19 @@
 {
-  "name": "iExecGraph",
+  "name": "NuoNetwork",
   "version": "0.1.0",
   "scripts": {
     "codegen": "graph codegen",
-    "create": "graph create amxx/nuo-network-dev --node https://api.thegraph.com/deploy/",
-    "create-core": "graph create amxx/nuo-network --node https://api.thegraph.com/deploy/",
-    "create-local": "graph create amxx/nuo-network --node http://127.0.0.1:8020",
     "build": "graph build",
-    "deploy": "graph deploy amxx/nuo-network-dev --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/",
-    "deploy-core": "graph deploy amxx/nuo-network --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/",
-    "deploy-local": "graph deploy amxx/nuo-network --ipfs http://localhost:5001          --node http://127.0.0.1:8020"
+    "create": "graph create amxx/nuo-network-dev --node https://api.thegraph.com/deploy/",
+    "create-core": "graph create amxx/nuo-network     --node https://api.thegraph.com/deploy/",
+    "create-local": "graph create amxx/nuo-network     --node http://localhost:8020",
+    "deploy": "graph deploy amxx/nuo-network-dev --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/",
+    "deploy-core": "graph deploy amxx/nuo-network     --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/",
+    "deploy-local": "graph deploy amxx/nuo-network     --node http://localhost:8020            --ipfs http://localhost:5001"
   },
   "devDependencies": {
-    "@graphprotocol/graph-cli": "^0.15.0",
-    "@graphprotocol/graph-ts": "^0.15.0"
+    "@graphprotocol/graph-cli": "^0.16.2",
+    "@graphprotocol/graph-ts": "^0.16.0"
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
